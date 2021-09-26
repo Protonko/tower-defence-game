@@ -1,14 +1,11 @@
 import type {ControlsBar} from './interfaces/ControlsBar'
 import type {Mouse} from './interfaces/Mouse'
 import {AREA_HEIGHT, AREA_WIDTH, BALANCE, CELL_SIZE} from './static/game'
-import {DEFENDER_COST} from './static/defenders'
-import {Defender} from './components/Defender'
 
 export class CanvasConfiguratorSingleton {
   private readonly canvas: HTMLCanvasElement
   private readonly context: CanvasRenderingContext2D | null
   private balance: number
-  private defenders: Defender[]
   private static instance: CanvasConfiguratorSingleton;
   private mouse: Mouse = {
     x: 10,
@@ -23,7 +20,6 @@ export class CanvasConfiguratorSingleton {
     this.canvas.width = AREA_WIDTH
     this.canvas.height = AREA_HEIGHT
     this.balance = BALANCE
-    this.defenders = []
 
     this.canvas.addEventListener('mousemove', event => {
       this.mouse.x = event.x - this.canvasPosition.left
@@ -34,19 +30,6 @@ export class CanvasConfiguratorSingleton {
       this.mouse.x = 0
       this.mouse.y = 0
     })
-
-    this.canvas.addEventListener('click', () => {
-      const gridPositionX = this.mouse.x - (this.mouse.x % CELL_SIZE)
-      const gridPositionY = this.mouse.y - (this.mouse.y % CELL_SIZE)
-
-      if (gridPositionY < CELL_SIZE) return
-
-      // TODO: исправить
-      if (this.balance > DEFENDER_COST) {
-        this.defenders.push(new Defender(gridPositionX, gridPositionY))
-        this.balance -= DEFENDER_COST
-      }
-    })
   }
 
   static getInstance(): CanvasConfiguratorSingleton {
@@ -55,6 +38,10 @@ export class CanvasConfiguratorSingleton {
     }
 
     return CanvasConfiguratorSingleton.instance;
+  }
+
+  get canvasElement(): HTMLCanvasElement {
+    return this.canvas
   }
 
   get canvasContext(): CanvasRenderingContext2D {
@@ -82,5 +69,13 @@ export class CanvasConfiguratorSingleton {
 
   get mouseValue(): Mouse {
     return this.mouse
+  }
+
+  get balanceValue(): number {
+    return this.balance
+  }
+
+  set balanceValue(value: number) {
+    this.balance = value
   }
 }

@@ -1,8 +1,8 @@
 import './assets/style/style.css'
-import {GameConfigurator} from './app/canvas'
+import {Game} from './app/Game'
 
 try {
-  new GameConfigurator()
+  new Game()
 } catch (error) {
   console.log(error)
 }
