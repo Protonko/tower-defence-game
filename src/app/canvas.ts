@@ -1,33 +1,36 @@
 import type {ControlsBar} from './interfaces/ControlsBar'
-import {AREA_WIDTH, AREA_HEIGHT, CELL_SIZE, CELL_GAP} from './static'
+import {Grid} from './components/Grid'
+import {CanvasConfiguratorSingleton} from './CanvasConfiguratorSingleton'
 
 export class GameConfigurator {
-  private canvas: HTMLCanvasElement
-  private context: CanvasRenderingContext2D
   private controlsBar: ControlsBar
-
-  private AREA_WIDTH = AREA_WIDTH
-  private AREA_HEIGHT = AREA_HEIGHT
-  private CELL_SIZE = CELL_SIZE
-  private CELL_GAP = CELL_GAP
-  private GAME_GRID = []
+  private context: CanvasRenderingContext2D
+  private readonly canvasWidth: number
+  private readonly canvasHeight: number
+  private grid: Grid
 
   constructor() {
-    this.canvas = document.getElementById('canvas-area') as HTMLCanvasElement
-    this.context = this.canvas.getContext('2d')
-    this.canvas.width = this.AREA_WIDTH
-    this.canvas.height = this.AREA_HEIGHT
-    this.controlsBar = {
-      width: this.canvas.width,
-      height: this.CELL_SIZE,
+    const canvasConfigurator = CanvasConfiguratorSingleton?.getInstance()
+    const context = canvasConfigurator.canvasContext
+
+    if (!context) {
+      throw new Error('2d context not supported or canvas already initialized');
     }
+
+    this.controlsBar = canvasConfigurator.controlsBar
+    this.context = canvasConfigurator.canvasContext
+    this.canvasWidth = canvasConfigurator.canvasWidth
+    this.canvasHeight = canvasConfigurator.canvasHeight
+    this.grid = new Grid()
 
     this.animate()
   }
 
   private animate = () => {
+    this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
     this.context.fillStyle = 'blue' // TMP
     this.context.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height)
+    this.grid.draw()
     requestAnimationFrame(this.animate)
   }
 }

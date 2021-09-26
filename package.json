@@ -2,7 +2,6 @@
   "name": "tower-defence-game",
   "version": "1.0.0",
   "description": "Tower defence game",
-  "main": "index.ts",
   "scripts": {
     "build": "cross-env webpack",
     "start": "cross-env SERVE=true webpack serve --open",
