@@ -1,6 +1,6 @@
-import type {ControlsBar} from './interfaces/ControlsBar'
-import type {Mouse} from './interfaces/Mouse'
-import {AREA_HEIGHT, AREA_WIDTH, BALANCE, CELL_SIZE} from './static/game'
+import type {ControlsBar} from '../interfaces/ControlsBar'
+import type {Mouse} from '../interfaces/Mouse'
+import {AREA_HEIGHT, AREA_WIDTH, BALANCE, CELL_SIZE} from '../static/game'
 
 export class CanvasConfiguratorSingleton {
   private readonly canvas: HTMLCanvasElement

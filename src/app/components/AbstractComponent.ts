@@ -1,5 +1,5 @@
 import {CELL_SIZE} from '../static/game'
-import {CanvasConfiguratorSingleton} from '../CanvasConfiguratorSingleton'
+import {CanvasConfiguratorSingleton} from '../services/CanvasConfiguratorSingleton'
 
 export abstract class AbstractComponent {
   protected readonly x: number

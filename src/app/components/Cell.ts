@@ -1,6 +1,7 @@
 import type {Mouse} from '../interfaces/Mouse'
 import {collision} from '../utils/collision'
 import {AbstractComponent} from './AbstractComponent'
+import {COLORS} from '../static/styles'
 
 export class Cell extends AbstractComponent {
   constructor(x: number, y: number) {
@@ -16,7 +17,7 @@ export class Cell extends AbstractComponent {
     }
 
     if (mouse.x && mouse.y && collision(mouse, this.canvasConfigurator.mouseValue)) {
-      this.canvasConfigurator.canvasContext.strokeStyle = 'black'
+      this.canvasConfigurator.canvasContext.strokeStyle = COLORS.cellColor
       this.canvasConfigurator.canvasContext.strokeRect(this.x, this.y, this.width, this.height)
     }
   }

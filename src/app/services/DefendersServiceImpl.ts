@@ -2,7 +2,7 @@ import type {DefendersService} from './interfaces/DefendersService'
 import {CELL_SIZE} from '../static/game'
 import {DEFENDER_COST} from '../static/defenders'
 import {Defender} from '../components/Defender'
-import {CanvasConfiguratorSingleton} from '../CanvasConfiguratorSingleton'
+import {CanvasConfiguratorSingleton} from './CanvasConfiguratorSingleton'
 
 export class DefendersServiceImpl implements DefendersService {
   private canvasConfiguration: CanvasConfiguratorSingleton

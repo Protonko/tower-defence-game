@@ -1,6 +1,8 @@
 import {HEALTH} from '../static/defenders'
 import {AbstractComponent} from './AbstractComponent'
 import {CELL_SIZE} from '../static/game'
+import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
+import {createFontStyle} from '../utils/createFontStyle'
 
 // TODO: фабричный метод для защитников
 export class Defender extends AbstractComponent {
@@ -19,10 +21,10 @@ export class Defender extends AbstractComponent {
   }
 
   draw() {
-    this.canvasConfigurator.canvasContext.fillStyle = 'blue'
+    this.canvasConfigurator.canvasContext.fillStyle = COLORS.defenderColor
     this.canvasConfigurator.canvasContext.fillRect(this.x, this.y, this.width, this.height)
     this.canvasConfigurator.canvasContext.fillStyle = 'gold'
-    this.canvasConfigurator.canvasContext.font = '30px Roboto'
+    this.canvasConfigurator.canvasContext.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
     this.canvasConfigurator.canvasContext.fillText(Math.floor(this.health).toString(), this.x, this.y + CELL_SIZE / 2)
   }
 }
