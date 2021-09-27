@@ -6,25 +6,33 @@ import {createFontStyle} from '../utils/createFontStyle'
 
 // TODO: фабричный метод для защитников
 export class Defender extends AbstractComponentWithPosition {
-  private shooting: boolean
-  private health: number
-  private timer: number
-  private projectiles = []
+  private _shooting: boolean
+  private _health: number
+  private _timer: number
+  private _projectiles = []
 
   constructor(x: number, y: number) {
-    super(x, y)
+    super(x, y, CELL_SIZE)
 
-    this.shooting = false
-    this.health = HEALTH
-    this.timer = 0
-    this.projectiles = []
+    this._shooting = false
+    this._health = HEALTH
+    this._timer = 0
+    this._projectiles = []
   }
 
   draw() {
-    this.gameConfigurator.context.fillStyle = COLORS.defenderColor
-    this.gameConfigurator.context.fillRect(this.x, this.y, this.width, this.height)
-    this.gameConfigurator.context.fillStyle = 'gold'
-    this.gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
-    this.gameConfigurator.context.fillText(Math.floor(this.health).toString(), this.x, this.y + CELL_SIZE / 2)
+    this._gameConfigurator.context.fillStyle = COLORS.defenderColor
+    this._gameConfigurator.context.fillRect(this._x, this._y, this._width, this._height)
+    this._gameConfigurator.context.fillStyle = 'gold'
+    this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
+    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
+  }
+
+  get health() {
+    return this._health
+  }
+
+  set health(health: number) {
+    this._health = health
   }
 }

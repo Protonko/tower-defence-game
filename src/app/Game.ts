@@ -1,11 +1,13 @@
 import type {DefendersService} from './services/interfaces/DefendersService'
 import type {EnemiesService} from './services/interfaces/EnemiesService'
-import {Grid} from './components/Grid'
-import {Toolbar} from './components/Toolbar'
-import {GameOver} from './components/GameOver'
+import type {BattleService} from './services/interfaces/BattleService'
 import {GameConfiguratorSingleton} from './services/GameConfiguratorSingleton'
 import {DefendersServiceImpl} from './services/DefendersServiceImpl'
 import {EnemiesServiceImpl} from './services/EnemiesServiceImpl'
+import {BattleServiceImpl} from './services/BattleServiceImpl'
+import {Grid} from './components/Grid'
+import {Toolbar} from './components/Toolbar'
+import {GameOver} from './components/GameOver'
 
 export class Game {
   private canvas: HTMLCanvasElement
@@ -18,6 +20,7 @@ export class Game {
   private gameOver: GameOver
   private defendersService: DefendersService
   private enemiesService: EnemiesService
+  private battleService: BattleService
 
   constructor() {
     const gameConfigurator = GameConfiguratorSingleton.getInstance()
@@ -38,6 +41,7 @@ export class Game {
     this.gameOver = new GameOver()
     this.defendersService = new DefendersServiceImpl()
     this.enemiesService = new EnemiesServiceImpl()
+    this.battleService = new BattleServiceImpl(this.defendersService, this.enemiesService)
 
     this.canvas.addEventListener('click', this.defendersService.buyDefender)
     this.animate()
@@ -51,6 +55,7 @@ export class Game {
     this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
     this.grid.draw()
     this.defendersService.drawDefenders()
+    this.battleService.fight()
     this.toolbar.draw()
     this.enemiesService.drawEnemies()
 

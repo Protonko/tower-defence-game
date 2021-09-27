@@ -1,29 +1,28 @@
 import type {Component} from '../interfaces/Component'
-import {CELL_SIZE} from '../../static/game'
 import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
 
 export abstract class AbstractComponentWithPosition implements Component {
-  protected readonly x: number
-  protected readonly y: number
-  protected readonly width: number
-  protected readonly height: number
-  protected readonly gameConfigurator: GameConfiguratorSingleton
+  protected _x: number
+  protected readonly _y: number
+  protected readonly _width: number
+  protected readonly _height: number
+  protected readonly _gameConfigurator: GameConfiguratorSingleton
 
-  protected constructor(x: number, y: number) {
-    this.x = x
-    this.y = y
-    this.width = CELL_SIZE
-    this.height = CELL_SIZE
-    this.gameConfigurator = GameConfiguratorSingleton.getInstance()
+  protected constructor(x: number, y: number, size: number) {
+    this._x = x
+    this._y = y
+    this._width = size
+    this._height = size
+    this._gameConfigurator = GameConfiguratorSingleton.getInstance()
   }
 
   abstract draw(): void
 
-  get xValue() {
-    return this.x
+  get x() {
+    return this._x
   }
 
-  get yValue() {
-    return this.y
+  get y() {
+    return this._y
   }
 }

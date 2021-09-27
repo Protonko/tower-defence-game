@@ -5,6 +5,7 @@ export const COLORS = {
   defenderColor: 'blue',
   enemyColor: 'red',
   cellColor: 'black',
+  cartridgeColor: 'hotpink',
 }
 
 // Sizes

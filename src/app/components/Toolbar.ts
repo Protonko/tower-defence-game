@@ -5,20 +5,20 @@ import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
 import {createFontStyle} from '../utils/createFontStyle'
 
 export class Toolbar implements Component {
-  private gameConfigurator: GameConfiguratorSingleton
-  private controlsBar: ControlsBar
+  private _gameConfigurator: GameConfiguratorSingleton
+  private _controlsBar: ControlsBar
 
   constructor() {
-    this.gameConfigurator = GameConfiguratorSingleton.getInstance()
-    this.controlsBar = this.gameConfigurator.controlsBar
+    this._gameConfigurator = GameConfiguratorSingleton.getInstance()
+    this._controlsBar = this._gameConfigurator.controlsBar
   }
 
   // TODO: Observer?
   draw = () => {
-    this.gameConfigurator.context.fillStyle = COLORS.backgroundColor
-    this.gameConfigurator.context.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height)
-    this.gameConfigurator.context.fillStyle = COLORS.textColor
-    this.gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
-    this.gameConfigurator.context.fillText(`Balance: ${this.gameConfigurator.balance}`, 20, 40)
+    this._gameConfigurator.context.fillStyle = COLORS.backgroundColor
+    this._gameConfigurator.context.fillRect(0, 0, this._controlsBar.width, this._controlsBar.height)
+    this._gameConfigurator.context.fillStyle = COLORS.textColor
+    this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
+    this._gameConfigurator.context.fillText(`Balance: ${this._gameConfigurator.balance}`, 20, 40)
   }
 }

@@ -3,7 +3,7 @@ import type {Mouse} from '../interfaces/Mouse'
 import {AREA_HEIGHT, AREA_WIDTH, BALANCE, CELL_SIZE} from '../static/game'
 
 export class GameConfiguratorSingleton {
-  private static instance: GameConfiguratorSingleton;
+  private static _instance: GameConfiguratorSingleton;
   private readonly _canvas: HTMLCanvasElement
   private readonly _context: CanvasRenderingContext2D | null
   private _balance: number
@@ -33,11 +33,11 @@ export class GameConfiguratorSingleton {
   }
 
   static getInstance(): GameConfiguratorSingleton {
-    if (!GameConfiguratorSingleton.instance) {
-      GameConfiguratorSingleton.instance = new GameConfiguratorSingleton();
+    if (!GameConfiguratorSingleton._instance) {
+      GameConfiguratorSingleton._instance = new GameConfiguratorSingleton();
     }
 
-    return GameConfiguratorSingleton.instance;
+    return GameConfiguratorSingleton._instance;
   }
 
   get canvas(): HTMLCanvasElement {
