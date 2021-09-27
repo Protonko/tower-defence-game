@@ -1,7 +1,8 @@
+import type {Component} from './interfaces/Component'
 import {AREA_HEIGHT, AREA_WIDTH, CELL_SIZE} from '../static/game'
 import {Cell} from './Cell'
 
-export class Grid {
+export class Grid implements Component {
   private gameGrid: Cell[]
 
   constructor() {

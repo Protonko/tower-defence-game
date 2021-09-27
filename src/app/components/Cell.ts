@@ -1,9 +1,9 @@
 import type {Mouse} from '../interfaces/Mouse'
 import {collision} from '../utils/collision'
-import {AbstractComponent} from './AbstractComponent'
+import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
 import {COLORS} from '../static/styles'
 
-export class Cell extends AbstractComponent {
+export class Cell extends AbstractComponentWithPosition {
   constructor(x: number, y: number) {
     super(x, y)
   }
@@ -16,9 +16,9 @@ export class Cell extends AbstractComponent {
       height: this.height,
     }
 
-    if (mouse.x && mouse.y && collision(mouse, this.canvasConfigurator.mouseValue)) {
-      this.canvasConfigurator.canvasContext.strokeStyle = COLORS.cellColor
-      this.canvasConfigurator.canvasContext.strokeRect(this.x, this.y, this.width, this.height)
+    if (mouse.x && mouse.y && collision(mouse, this.gameConfigurator.mouse)) {
+      this.gameConfigurator.context.strokeStyle = COLORS.cellColor
+      this.gameConfigurator.context.strokeRect(this.x, this.y, this.width, this.height)
     }
   }
 }
