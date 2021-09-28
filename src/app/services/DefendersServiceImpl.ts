@@ -1,19 +1,21 @@
+import type {CartridgesService} from './interfaces/CartridgesService'
 import type {DefendersService} from './interfaces/DefendersService'
 import {CELL_SIZE} from '../static/game'
 import {DEFENDER_COST} from '../static/defenders'
 import {Defender} from '../components/Defender'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
-import {Cartridge} from '../components/Cartridge'
 
 export class DefendersServiceImpl implements DefendersService {
   private _canvasConfiguration: GameConfiguratorSingleton
+  private _cartridgesService: CartridgesService
   private _defenders: Defender[]
-  private _cartridges: Cartridge[]
+  private _timer: number
 
-  constructor() {
+  constructor(cartridgesService: CartridgesService) {
+    this._cartridgesService = cartridgesService
     this._canvasConfiguration = GameConfiguratorSingleton.getInstance()
     this._defenders = []
-    this._cartridges = []
+    this._timer = 0
   }
 
   buyDefender = () => {
@@ -34,27 +36,11 @@ export class DefendersServiceImpl implements DefendersService {
     this._defenders.splice(index, 1)
   }
 
-  removeCartridgeByIndex(index: number) {
-    this._cartridges.splice(index, 1)
-  }
-
   drawDefenders() {
-    this._defenders.forEach(defender => defender.draw())
-  }
-
-  drawCartridges() {
-    this._cartridges.forEach((cartridge, index) => {
-      cartridge.move()
-      cartridge.draw()
-
-      if (cartridge?.x > this._canvasConfiguration.canvasWidth - CELL_SIZE) {
-        this.removeCartridgeByIndex(index)
-      }
+    this._defenders.forEach(defender => {
+      defender.draw()
+      this._cartridgesService.appendCartridge(defender.x, defender.y)
     })
-  }
-
-  shoot() {
-    // ...
   }
 
   get defenders() {

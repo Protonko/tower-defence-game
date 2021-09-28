@@ -6,18 +6,14 @@ import {createFontStyle} from '../utils/createFontStyle'
 
 // TODO: фабричный метод для защитников
 export class Defender extends AbstractComponentWithPosition {
-  private _shooting: boolean
   private _health: number
   private _timer: number
-  private _projectiles = []
 
   constructor(x: number, y: number) {
     super(x, y, CELL_SIZE)
 
-    this._shooting = false
     this._health = HEALTH
     this._timer = 0
-    this._projectiles = []
   }
 
   draw() {

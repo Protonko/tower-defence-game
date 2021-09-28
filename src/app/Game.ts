@@ -1,7 +1,9 @@
+import type {CartridgesService} from './services/interfaces/CartridgesService'
 import type {DefendersService} from './services/interfaces/DefendersService'
 import type {EnemiesService} from './services/interfaces/EnemiesService'
 import type {BattleService} from './services/interfaces/BattleService'
 import {GameConfiguratorSingleton} from './services/GameConfiguratorSingleton'
+import {CartridgesServiceImpl} from './services/CartridgesServiceImpl'
 import {DefendersServiceImpl} from './services/DefendersServiceImpl'
 import {EnemiesServiceImpl} from './services/EnemiesServiceImpl'
 import {BattleServiceImpl} from './services/BattleServiceImpl'
@@ -18,6 +20,7 @@ export class Game {
   private grid: Grid
   private toolbar: Toolbar
   private gameOver: GameOver
+  private cartridgesService: CartridgesService
   private defendersService: DefendersService
   private enemiesService: EnemiesService
   private battleService: BattleService
@@ -39,7 +42,8 @@ export class Game {
     this.grid = new Grid()
     this.toolbar = new Toolbar()
     this.gameOver = new GameOver()
-    this.defendersService = new DefendersServiceImpl()
+    this.cartridgesService = new CartridgesServiceImpl()
+    this.defendersService = new DefendersServiceImpl(this.cartridgesService)
     this.enemiesService = new EnemiesServiceImpl()
     this.battleService = new BattleServiceImpl(this.defendersService, this.enemiesService)
 
@@ -57,6 +61,7 @@ export class Game {
     this.defendersService.drawDefenders()
     this.battleService.fight()
     this.toolbar.draw()
+    this.cartridgesService.drawCartridges()
     this.enemiesService.drawEnemies()
 
     if (!this.isGameOver) {
