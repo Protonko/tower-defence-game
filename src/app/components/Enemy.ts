@@ -54,6 +54,18 @@ export class Enemy implements Component {
     return this._speed
   }
 
+  get reward() {
+    return this._reward
+  }
+
+  get health() {
+    return this._health
+  }
+
+  set health(health: number) {
+    this._health = health
+  }
+
   set movement(movement: number) {
     this._movement = movement
   }

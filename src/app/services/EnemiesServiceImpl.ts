@@ -5,15 +5,13 @@ import {CELL_SIZE} from '../static/game'
 import {ENEMY_CREATION_INTERVAL} from '../static/enemies'
 
 export class EnemiesServiceImpl implements EnemiesService {
-  private _canvasConfiguration: GameConfiguratorSingleton
+  private _gameConfiguration: GameConfiguratorSingleton
   private _enemies: Enemy[]
-  // private enemyPositions: number[]
   private _isEnemyGotBase: boolean
 
   constructor() {
-    this._canvasConfiguration = GameConfiguratorSingleton.getInstance()
+    this._gameConfiguration = GameConfiguratorSingleton.getInstance()
     this._enemies = []
-    // this.enemyPositions = []
     this._isEnemyGotBase = false
 
     setInterval(() => {
@@ -24,7 +22,10 @@ export class EnemiesServiceImpl implements EnemiesService {
   private createEnemy() {
     const yPosition = Math.floor(Math.random() * 5 + 1) * CELL_SIZE
     this._enemies.push(new Enemy(yPosition))
-    // this.enemyPositions.push(yPosition)
+  }
+
+  removeEnemyByIndex(index: number) {
+    this._enemies.splice(index, 1)
   }
 
   drawEnemies() {

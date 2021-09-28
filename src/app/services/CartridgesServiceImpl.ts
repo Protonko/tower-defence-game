@@ -16,7 +16,7 @@ export class CartridgesServiceImpl implements CartridgesService {
     this._canvasWidth = gameConfigurator.canvasWidth
   }
 
-  private removeCartridgeByIndex(index: number) {
+  removeCartridgeByIndex(index: number) {
     this._cartridges.splice(index, 1)
   }
 

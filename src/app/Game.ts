@@ -45,7 +45,7 @@ export class Game {
     this.cartridgesService = new CartridgesServiceImpl()
     this.defendersService = new DefendersServiceImpl(this.cartridgesService)
     this.enemiesService = new EnemiesServiceImpl()
-    this.battleService = new BattleServiceImpl(this.defendersService, this.enemiesService)
+    this.battleService = new BattleServiceImpl(this.defendersService, this.enemiesService, this.cartridgesService)
 
     this.canvas.addEventListener('click', this.defendersService.buyDefender)
     this.animate()
