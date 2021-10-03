@@ -2,37 +2,34 @@ import type {BattleService} from './interfaces/BattleService'
 import type {DefendersService} from './interfaces/DefendersService'
 import type {EnemiesService} from './interfaces/EnemiesService'
 import type {CartridgesService} from './interfaces/CartridgesService'
+import {injectable, inject} from 'inversify'
+import {SERVICE_IDENTIFIER} from '../config/service-identifier'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 import {collision} from '../utils/collision'
 import {ENEMY_DAMAGE} from '../static/enemies'
 import {CARTRIDGE_POWER} from '../static/defenders'
 
+@injectable()
 export class BattleServiceImpl implements BattleService {
   private _gameConfiguration: GameConfiguratorSingleton
-  private _defendersService: DefendersService
-  private _enemiesService: EnemiesService
-  private _cartridgesService: CartridgesService
 
   constructor(
-    defendersService: DefendersService,
-    enemiesService: EnemiesService,
-    cartridgesService: CartridgesService,
+    @inject(SERVICE_IDENTIFIER.DEFENDERS_SERVICE) private defendersService: DefendersService,
+    @inject(SERVICE_IDENTIFIER.ENEMIES_SERVICE) private enemiesService: EnemiesService,
+    @inject(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE) private cartridgesService: CartridgesService,
   ) {
     this._gameConfiguration = GameConfiguratorSingleton.getInstance()
-    this._defendersService = defendersService
-    this._enemiesService = enemiesService
-    this._cartridgesService = cartridgesService
   }
 
   private attackOnDefender() {
-    this._defendersService.defenders.forEach((defender, index) => {
-      this._enemiesService.enemies.forEach(enemy => {
+    this.defendersService.defenders.forEach((defender, index) => {
+      this.enemiesService.enemies.forEach(enemy => {
         if (collision(defender, enemy)) {
           enemy.movement = 0
           defender.health = defender.health - ENEMY_DAMAGE
 
           if (defender?.health <= 0) {
-            this._defendersService.removeDefenderByIndex(index)
+            this.defendersService.removeDefenderByIndex(index)
             enemy.movement = enemy.speed
           }
         }
@@ -41,16 +38,16 @@ export class BattleServiceImpl implements BattleService {
   }
 
   private attackOnEnemy() {
-    this._enemiesService.enemies.forEach((enemy, enemyIndex) => {
-      this._cartridgesService.cartridges.forEach((cartridge, cartridgeIndex) => {
+    this.enemiesService.enemies.forEach((enemy, enemyIndex) => {
+      this.cartridgesService.cartridges.forEach((cartridge, cartridgeIndex) => {
         if (collision(enemy, cartridge)) {
           enemy.health = enemy.health - CARTRIDGE_POWER
 
-          this._cartridgesService.removeCartridgeByIndex(cartridgeIndex)
+          this.cartridgesService.removeCartridgeByIndex(cartridgeIndex)
 
           if (enemy?.health <= 0) {
             this._gameConfiguration.balance = this._gameConfiguration.balance + enemy.reward
-            this._enemiesService.removeEnemyByIndex(enemyIndex)
+            this.enemiesService.removeEnemyByIndex(enemyIndex)
           }
         }
       })

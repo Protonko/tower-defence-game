@@ -1,9 +1,11 @@
 import type {EnemiesService} from './interfaces/EnemiesService'
+import {injectable} from 'inversify'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 import {Enemy} from '../components/Enemy'
 import {CELL_SIZE} from '../static/game'
 import {ENEMY_CREATION_INTERVAL} from '../static/enemies'
 
+@injectable()
 export class EnemiesServiceImpl implements EnemiesService {
   private _gameConfiguration: GameConfiguratorSingleton
   private _enemies: Enemy[]

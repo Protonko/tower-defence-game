@@ -1,8 +1,10 @@
 import type {CartridgesService} from './interfaces/CartridgesService'
+import {injectable} from 'inversify'
 import {Cartridge} from '../components/Cartridge'
 import {CELL_SIZE} from '../static/game'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 
+@injectable()
 export class CartridgesServiceImpl implements CartridgesService {
   private _cartridges: Cartridge[]
   private _canvasWidth: number

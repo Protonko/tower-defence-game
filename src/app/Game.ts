@@ -3,10 +3,8 @@ import type {DefendersService} from './services/interfaces/DefendersService'
 import type {EnemiesService} from './services/interfaces/EnemiesService'
 import type {BattleService} from './services/interfaces/BattleService'
 import {GameConfiguratorSingleton} from './services/GameConfiguratorSingleton'
-import {CartridgesServiceImpl} from './services/CartridgesServiceImpl'
-import {DefendersServiceImpl} from './services/DefendersServiceImpl'
-import {EnemiesServiceImpl} from './services/EnemiesServiceImpl'
-import {BattleServiceImpl} from './services/BattleServiceImpl'
+import {container} from './config/ioc.config'
+import {SERVICE_IDENTIFIER} from './config/service-identifier'
 import {Grid} from './components/Grid'
 import {Toolbar} from './components/Toolbar'
 import {GameOver} from './components/GameOver'
@@ -42,10 +40,10 @@ export class Game {
     this.grid = new Grid()
     this.toolbar = new Toolbar()
     this.gameOver = new GameOver()
-    this.cartridgesService = new CartridgesServiceImpl()
-    this.defendersService = new DefendersServiceImpl(this.cartridgesService)
-    this.enemiesService = new EnemiesServiceImpl()
-    this.battleService = new BattleServiceImpl(this.defendersService, this.enemiesService, this.cartridgesService)
+    this.cartridgesService = container.get(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE)
+    this.defendersService = container.get(SERVICE_IDENTIFIER.DEFENDERS_SERVICE)
+    this.enemiesService = container.get(SERVICE_IDENTIFIER.ENEMIES_SERVICE)
+    this.battleService = container.get(SERVICE_IDENTIFIER.BATTLE_SERVICE)
 
     this.canvas.addEventListener('click', this.defendersService.buyDefender)
     this.animate()

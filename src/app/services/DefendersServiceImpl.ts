@@ -1,18 +1,21 @@
 import type {CartridgesService} from './interfaces/CartridgesService'
 import type {DefendersService} from './interfaces/DefendersService'
+import {inject, injectable} from 'inversify'
+import {SERVICE_IDENTIFIER} from '../config/service-identifier'
 import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {DEFENDER_COST} from '../static/defenders'
 import {Defender} from '../components/Defender'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 
+@injectable()
 export class DefendersServiceImpl implements DefendersService {
   private _canvasConfiguration: GameConfiguratorSingleton
-  private _cartridgesService: CartridgesService
   private _defenders: Defender[]
   private _timer: number
 
-  constructor(cartridgesService: CartridgesService) {
-    this._cartridgesService = cartridgesService
+  constructor(
+    @inject(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE) private cartridgesService: CartridgesService
+  ) {
     this._canvasConfiguration = GameConfiguratorSingleton.getInstance()
     this._defenders = []
     this._timer = 0
@@ -39,7 +42,7 @@ export class DefendersServiceImpl implements DefendersService {
   drawDefenders() {
     this._defenders.forEach(defender => {
       defender.draw()
-      defender.shoot(this._cartridgesService.cartridges)
+      defender.shoot(this.cartridgesService.cartridges)
     })
   }
 
