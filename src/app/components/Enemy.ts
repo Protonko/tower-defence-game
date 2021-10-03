@@ -1,6 +1,6 @@
 import type {Component} from './interfaces/Component'
 import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
-import {CELL_SIZE} from '../static/game'
+import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {ENEMY_HEALTH, ENEMY_REWARD, ENEMY_SPEED} from '../static/enemies'
 import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
 import {createFontStyle} from '../utils/createFontStyle'
@@ -22,8 +22,8 @@ export class Enemy implements Component {
     this._context = gameConfigurator.context
     this._x = gameConfigurator.canvasWidth
     this._y = y
-    this._width = CELL_SIZE
-    this._height = CELL_SIZE
+    this._width = CELL_SIZE - CELL_GAP * 2
+    this._height = CELL_SIZE - CELL_GAP * 2
     this._health = ENEMY_HEALTH
     this._reward = ENEMY_REWARD
     this._speed = ENEMY_SPEED
@@ -40,6 +40,14 @@ export class Enemy implements Component {
     this._context.fillStyle = COLORS.textColor
     this._context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
     this._context.fillText(Math.floor(this._health).toString(), this._x, this._y + 25)
+  }
+
+  get width() {
+    return this._width
+  }
+
+  get height() {
+    return this._height
   }
 
   get x() {

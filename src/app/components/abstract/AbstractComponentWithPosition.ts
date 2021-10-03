@@ -18,6 +18,14 @@ export abstract class AbstractComponentWithPosition implements Component {
 
   abstract draw(): void
 
+  get width() {
+    return this._width
+  }
+
+  get height() {
+    return this._height
+  }
+
   get x() {
     return this._x
   }

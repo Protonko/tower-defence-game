@@ -1,6 +1,6 @@
 import type {CartridgesService} from './interfaces/CartridgesService'
 import type {DefendersService} from './interfaces/DefendersService'
-import {CELL_SIZE} from '../static/game'
+import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {DEFENDER_COST} from '../static/defenders'
 import {Defender} from '../components/Defender'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
@@ -19,8 +19,8 @@ export class DefendersServiceImpl implements DefendersService {
   }
 
   buyDefender = () => {
-    const gridPositionX = this._canvasConfiguration.mouse.x - (this._canvasConfiguration.mouse.x % CELL_SIZE)
-    const gridPositionY = this._canvasConfiguration.mouse.y - (this._canvasConfiguration.mouse.y % CELL_SIZE)
+    const gridPositionX = this._canvasConfiguration.mouse.x - (this._canvasConfiguration.mouse.x % CELL_SIZE) + CELL_GAP
+    const gridPositionY = this._canvasConfiguration.mouse.y - (this._canvasConfiguration.mouse.y % CELL_SIZE) + CELL_GAP
     const isCollision = this._defenders.some(defender => defender.x === gridPositionX && defender.y === gridPositionY)
 
     if (gridPositionY < CELL_SIZE || isCollision) return

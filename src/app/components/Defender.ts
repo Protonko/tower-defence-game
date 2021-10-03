@@ -1,6 +1,6 @@
 import {HEALTH} from '../static/defenders'
 import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
-import {CELL_SIZE} from '../static/game'
+import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
 import {createFontStyle} from '../utils/createFontStyle'
 
@@ -10,7 +10,7 @@ export class Defender extends AbstractComponentWithPosition {
   private _timer: number
 
   constructor(x: number, y: number) {
-    super(x, y, CELL_SIZE)
+    super(x, y, CELL_SIZE - CELL_GAP * 2)
 
     this._health = HEALTH
     this._timer = 0

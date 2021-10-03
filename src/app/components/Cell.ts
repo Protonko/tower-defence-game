@@ -10,6 +10,7 @@ export class Cell extends AbstractComponentWithPosition {
   }
 
   draw = () => {
+    const gameMouse = this._gameConfigurator.mouse
     const mouse: Mouse = {
       x: this._x,
       y: this._y,
@@ -17,7 +18,7 @@ export class Cell extends AbstractComponentWithPosition {
       height: this._height,
     }
 
-    if (mouse.x && mouse.y && collision(mouse, this._gameConfigurator.mouse)) {
+    if (gameMouse.x && gameMouse.y && collision(mouse, gameMouse)) {
       this._gameConfigurator.context.strokeStyle = COLORS.cellColor
       this._gameConfigurator.context.strokeRect(this._x, this._y, this._width, this._height)
     }

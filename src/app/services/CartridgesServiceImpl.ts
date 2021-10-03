@@ -33,7 +33,7 @@ export class CartridgesServiceImpl implements CartridgesService {
       cartridge.move()
       cartridge.draw()
 
-      if (cartridge?.x > this._canvasWidth - CELL_SIZE / 2){
+      if (cartridge?.x > this._canvasWidth - CELL_SIZE){
         this.removeCartridgeByIndex(index)
       }
     })
