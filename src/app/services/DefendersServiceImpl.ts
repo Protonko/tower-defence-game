@@ -9,29 +9,29 @@ import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 
 @injectable()
 export class DefendersServiceImpl implements DefendersService {
-  private _canvasConfiguration: GameConfiguratorSingleton
+  private _gameConfigurator: GameConfiguratorSingleton
   private _defenders: Defender[]
   private _timer: number
 
   constructor(
     @inject(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE) private cartridgesService: CartridgesService
   ) {
-    this._canvasConfiguration = GameConfiguratorSingleton.getInstance()
+    this._gameConfigurator = GameConfiguratorSingleton.getInstance()
     this._defenders = []
     this._timer = 0
   }
 
   buyDefender = () => {
-    const gridPositionX = this._canvasConfiguration.mouse.x - (this._canvasConfiguration.mouse.x % CELL_SIZE) + CELL_GAP
-    const gridPositionY = this._canvasConfiguration.mouse.y - (this._canvasConfiguration.mouse.y % CELL_SIZE) + CELL_GAP
+    const gridPositionX = this._gameConfigurator.mouse.x - (this._gameConfigurator.mouse.x % CELL_SIZE) + CELL_GAP
+    const gridPositionY = this._gameConfigurator.mouse.y - (this._gameConfigurator.mouse.y % CELL_SIZE) + CELL_GAP
     const isCollision = this._defenders.some(defender => defender.x === gridPositionX && defender.y === gridPositionY)
 
     if (gridPositionY < CELL_SIZE || isCollision) return
 
     if (
-      this._canvasConfiguration.balance >= DEFENDER_COST) {
+      this._gameConfigurator.balance >= DEFENDER_COST) {
       this._defenders.push(new Defender(gridPositionX, gridPositionY))
-      this._canvasConfiguration.balance = this._canvasConfiguration.balance - DEFENDER_COST
+      this._gameConfigurator.balance = this._gameConfigurator.balance - DEFENDER_COST
     }
   }
 

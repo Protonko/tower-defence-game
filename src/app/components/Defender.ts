@@ -21,6 +21,8 @@ export class Defender extends AbstractComponentWithPosition {
     this._gameConfigurator.context.fillStyle = COLORS.defenderColor
     this._gameConfigurator.context.fillRect(this._x, this._y, this._width, this._height)
     this._gameConfigurator.context.fillStyle = 'gold'
+    this._gameConfigurator.context.textAlign = 'start'
+    this._gameConfigurator.context.textBaseline = 'middle'
     this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
     this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
   }

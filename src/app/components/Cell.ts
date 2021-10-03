@@ -1,4 +1,3 @@
-import type {Mouse} from '../interfaces/Mouse'
 import {collision} from '../utils/collision'
 import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
 import {COLORS} from '../static/styles'
@@ -11,14 +10,8 @@ export class Cell extends AbstractComponentWithPosition {
 
   draw = () => {
     const gameMouse = this._gameConfigurator.mouse
-    const mouse: Mouse = {
-      x: this._x,
-      y: this._y,
-      width: this._width,
-      height: this._height,
-    }
 
-    if (gameMouse.x && gameMouse.y && collision(mouse, gameMouse)) {
+    if (gameMouse.x && gameMouse.y && collision(this, gameMouse)) {
       this._gameConfigurator.context.strokeStyle = COLORS.cellColor
       this._gameConfigurator.context.strokeRect(this._x, this._y, this._width, this._height)
     }

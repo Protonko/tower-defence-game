@@ -19,6 +19,8 @@ export class Toolbar implements Component {
     this._gameConfigurator.context.fillRect(0, 0, this._controlsBar.width, this._controlsBar.height)
     this._gameConfigurator.context.fillStyle = COLORS.textColor
     this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
+    this._gameConfigurator.context.textAlign = 'start'
+    this._gameConfigurator.context.textBaseline = 'middle'
     this._gameConfigurator.context.fillText(`Balance: ${this._gameConfigurator.balance}`, 20, 40)
   }
 }

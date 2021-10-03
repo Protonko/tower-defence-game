@@ -11,14 +11,14 @@ import {CARTRIDGE_POWER} from '../static/defenders'
 
 @injectable()
 export class BattleServiceImpl implements BattleService {
-  private _gameConfiguration: GameConfiguratorSingleton
+  private _gameConfigurator: GameConfiguratorSingleton
 
   constructor(
     @inject(SERVICE_IDENTIFIER.DEFENDERS_SERVICE) private defendersService: DefendersService,
     @inject(SERVICE_IDENTIFIER.ENEMIES_SERVICE) private enemiesService: EnemiesService,
     @inject(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE) private cartridgesService: CartridgesService,
   ) {
-    this._gameConfiguration = GameConfiguratorSingleton.getInstance()
+    this._gameConfigurator = GameConfiguratorSingleton.getInstance()
   }
 
   private attackOnDefender() {
@@ -46,7 +46,7 @@ export class BattleServiceImpl implements BattleService {
           this.cartridgesService.removeCartridgeByIndex(cartridgeIndex)
 
           if (enemy?.health <= 0) {
-            this._gameConfiguration.balance = this._gameConfiguration.balance + enemy.reward
+            this._gameConfigurator.balance = this._gameConfigurator.balance + enemy.reward
             this.enemiesService.removeEnemyByIndex(enemyIndex)
           }
         }

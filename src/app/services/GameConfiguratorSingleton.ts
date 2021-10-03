@@ -1,6 +1,6 @@
 import type {ControlsBar} from '../interfaces/ControlsBar'
 import type {Mouse} from '../interfaces/Mouse'
-import {AREA_HEIGHT, AREA_WIDTH, BALANCE, CELL_SIZE} from '../static/game'
+import {AREA_HEIGHT, AREA_WIDTH, BALANCE, TOOLBAR_HEIGHT} from '../static/game'
 
 export class GameConfiguratorSingleton {
   private static _instance: GameConfiguratorSingleton;
@@ -63,7 +63,7 @@ export class GameConfiguratorSingleton {
   get controlsBar(): ControlsBar {
     return {
       width: this.canvas.width,
-      height: CELL_SIZE,
+      height: TOOLBAR_HEIGHT,
     }
   }
 

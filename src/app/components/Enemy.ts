@@ -39,7 +39,9 @@ export class Enemy implements Component {
     this._context.fillRect(this._x, this._y, this._width, this._height)
     this._context.fillStyle = COLORS.textColor
     this._context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
-    this._context.fillText(Math.floor(this._health).toString(), this._x, this._y + 25)
+    this._context.textAlign = 'start'
+    this._context.textBaseline = 'middle'
+    this._context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
   }
 
   get width() {

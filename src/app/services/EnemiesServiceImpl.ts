@@ -7,12 +7,12 @@ import {ENEMY_CREATION_INTERVAL} from '../static/enemies'
 
 @injectable()
 export class EnemiesServiceImpl implements EnemiesService {
-  private _gameConfiguration: GameConfiguratorSingleton
+  private _gameConfigurator: GameConfiguratorSingleton
   private _enemies: Enemy[]
   private _isEnemyGotBase: boolean
 
   constructor() {
-    this._gameConfiguration = GameConfiguratorSingleton.getInstance()
+    this._gameConfigurator = GameConfiguratorSingleton.getInstance()
     this._enemies = []
     this._isEnemyGotBase = false
 
