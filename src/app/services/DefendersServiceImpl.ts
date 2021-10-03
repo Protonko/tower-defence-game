@@ -39,7 +39,7 @@ export class DefendersServiceImpl implements DefendersService {
   drawDefenders() {
     this._defenders.forEach(defender => {
       defender.draw()
-      this._cartridgesService.appendCartridge(defender.x, defender.y)
+      defender.shoot(this._cartridgesService.cartridges)
     })
   }
 

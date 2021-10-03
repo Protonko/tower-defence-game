@@ -1,8 +1,9 @@
-import {HEALTH} from '../static/defenders'
 import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
+import {HEALTH} from '../static/defenders'
 import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
 import {createFontStyle} from '../utils/createFontStyle'
+import {Cartridge} from './Cartridge'
 
 // TODO: фабричный метод для защитников
 export class Defender extends AbstractComponentWithPosition {
@@ -22,6 +23,14 @@ export class Defender extends AbstractComponentWithPosition {
     this._gameConfigurator.context.fillStyle = 'gold'
     this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
     this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
+  }
+
+  shoot(cartridges: Cartridge[]) {
+    this._timer++;
+
+    if (this._timer % 100 === 0) {
+      cartridges.push(new Cartridge(this._x + CELL_SIZE, this._y + CELL_SIZE / 2));
+    }
   }
 
   get health() {
