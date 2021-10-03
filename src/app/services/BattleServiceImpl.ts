@@ -41,16 +41,16 @@ export class BattleServiceImpl implements BattleService {
   }
 
   private attackOnEnemy() {
-    this._enemiesService.enemies.forEach(enemy => {
-      this._cartridgesService.cartridges.forEach((cartridge, index) => {
+    this._enemiesService.enemies.forEach((enemy, enemyIndex) => {
+      this._cartridgesService.cartridges.forEach((cartridge, cartridgeIndex) => {
         if (collision(enemy, cartridge)) {
           enemy.health = enemy.health - CARTRIDGE_POWER
 
-          this._cartridgesService.removeCartridgeByIndex(index)
+          this._cartridgesService.removeCartridgeByIndex(cartridgeIndex)
 
           if (enemy?.health <= 0) {
             this._gameConfiguration.balance = this._gameConfiguration.balance + enemy.reward
-            this._enemiesService.removeEnemyByIndex(index)
+            this._enemiesService.removeEnemyByIndex(enemyIndex)
           }
         }
       })
