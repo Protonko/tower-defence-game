@@ -44,7 +44,7 @@ export class Bonus extends AbstractComponentWithPosition {
     this._gameConfigurator.context.drawImage(
       this._coinSprite,
       this._frameX,
-      this._frameY * 44,
+      this._frameY * imageHeight,
       imageWidth,
       imageHeight,
       this._x,

@@ -1,5 +1,6 @@
 // Colors
 export const COLORS = {
+  toolbarColor: 'rgba(255, 255, 255, 0.25)',
   textColor: 'gold',
   backgroundColor: 'cadetblue',
   defenderColor: 'blue',

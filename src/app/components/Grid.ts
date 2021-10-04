@@ -1,6 +1,6 @@
 import type {Component} from './interfaces/Component'
 import backgroundImage from '../../assets/images/bg.png'
-import {AREA_HEIGHT, AREA_WIDTH, CASTLE_WIDTH, CELL_SIZE} from '../static/game'
+import {AREA_HEIGHT, AREA_WIDTH, CASTLE_WIDTH, CELL_SIZE, TOOLBAR_HEIGHT} from '../static/game'
 import {Cell} from './Cell'
 import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
 
@@ -16,7 +16,7 @@ export class Grid implements Component {
   }
 
   private prepareGrid = () => {
-    for (let y = 0; y < AREA_HEIGHT; y += CELL_SIZE) {
+    for (let y = TOOLBAR_HEIGHT; y < AREA_HEIGHT; y += CELL_SIZE) {
       for (let x = CASTLE_WIDTH; x < AREA_WIDTH; x += CELL_SIZE) {
         this._gameGrid.push(new Cell(x, y))
       }

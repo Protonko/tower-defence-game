@@ -13,9 +13,8 @@ export class Toolbar implements Component {
     this._controlsBar = this._gameConfigurator.controlsBar
   }
 
-  // TODO: Observer?
   draw = () => {
-    this._gameConfigurator.context.fillStyle = 'transparent'
+    this._gameConfigurator.context.fillStyle = COLORS.toolbarColor
     this._gameConfigurator.context.fillRect(0, 0, this._controlsBar.width, this._controlsBar.height)
     this._gameConfigurator.context.fillStyle = COLORS.textColor
     this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
