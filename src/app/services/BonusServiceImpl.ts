@@ -32,6 +32,7 @@ export class BonusServiceImpl implements BonusService {
 
   drawBonuses() {
     this._bonuses.forEach((bonus, index) => {
+      bonus.move()
       bonus.draw()
 
       if (bonus && collision(this._gameConfigurator.mouse, bonus)) {

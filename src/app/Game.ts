@@ -11,6 +11,7 @@ import {Toolbar} from './components/Toolbar'
 import {GameOver} from './components/GameOver'
 
 export class Game {
+  private gameConfigurator: GameConfiguratorSingleton
   private canvas: HTMLCanvasElement
   private context: CanvasRenderingContext2D
   private readonly canvasWidth: number
@@ -26,17 +27,17 @@ export class Game {
   private bonusService: BonusService
 
   constructor() {
-    const gameConfigurator = GameConfiguratorSingleton.getInstance()
-    const context = gameConfigurator.context
+    this.gameConfigurator = GameConfiguratorSingleton.getInstance()
+    const context = this.gameConfigurator.context
 
     if (!context) {
       throw new Error('2d context not supported or canvas already initialized');
     }
 
-    this.canvas = gameConfigurator.canvas
-    this.context = gameConfigurator.context
-    this.canvasWidth = gameConfigurator.canvasWidth
-    this.canvasHeight = gameConfigurator.canvasHeight
+    this.canvas = this.gameConfigurator.canvas
+    this.context = this.gameConfigurator.context
+    this.canvasWidth = this.gameConfigurator.canvasWidth
+    this.canvasHeight = this.gameConfigurator.canvasHeight
     this.isGameOver = false
 
     this.grid = new Grid()
@@ -65,6 +66,7 @@ export class Game {
     this.cartridgesService.drawCartridges()
     this.enemiesService.drawEnemies()
     this.bonusService.drawBonuses()
+    this.gameConfigurator.frame = this.gameConfigurator.frame + 1
 
     if (!this.isGameOver) {
       requestAnimationFrame(this.animate)

@@ -2,7 +2,7 @@ import type {CartridgesService} from './interfaces/CartridgesService'
 import type {DefendersService} from './interfaces/DefendersService'
 import {inject, injectable} from 'inversify'
 import {SERVICE_IDENTIFIER} from '../config/service-identifier'
-import {CELL_GAP, CELL_SIZE} from '../static/game'
+import {CASTLE_WIDTH, CELL_GAP, CELL_SIZE, TOOLBAR_HEIGHT} from '../static/game'
 import {DEFENDER_COST} from '../static/defenders'
 import {Defender} from '../components/Defender'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
@@ -26,7 +26,7 @@ export class DefendersServiceImpl implements DefendersService {
     const gridPositionY = this._gameConfigurator.mouse.y - (this._gameConfigurator.mouse.y % CELL_SIZE) + CELL_GAP
     const isCollision = this._defenders.some(defender => defender.x === gridPositionX && defender.y === gridPositionY)
 
-    if (gridPositionY < CELL_SIZE || isCollision) return
+    if (gridPositionY < TOOLBAR_HEIGHT || gridPositionX < CASTLE_WIDTH || isCollision) return
 
     if (
       this._gameConfigurator.balance >= DEFENDER_COST) {

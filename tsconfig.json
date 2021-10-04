@@ -15,7 +15,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "typeRoots" : ["src/@types"]
   },
   "include": [
     "src/**/*"

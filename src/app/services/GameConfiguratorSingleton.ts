@@ -7,6 +7,7 @@ export class GameConfiguratorSingleton {
   private readonly _canvas: HTMLCanvasElement
   private readonly _context: CanvasRenderingContext2D | null
   private _balance: number
+  private _frame: number
   private _mouse: Mouse = {
     x: 10,
     y: 10,
@@ -20,6 +21,7 @@ export class GameConfiguratorSingleton {
     this._canvas.width = AREA_WIDTH
     this._canvas.height = AREA_HEIGHT
     this._balance = BALANCE
+    this._frame = 0
 
     this._canvas.addEventListener('mousemove', event => {
       this._mouse.x = event.x - this.canvasPosition.left
@@ -77,5 +79,13 @@ export class GameConfiguratorSingleton {
 
   set balance(value: number) {
     this._balance = value
+  }
+
+  get frame(): number {
+    return this._frame
+  }
+
+  set frame(value: number) {
+    this._frame = value
   }
 }

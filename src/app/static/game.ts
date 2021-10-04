@@ -5,3 +5,4 @@ export const CELL_GAP = 3
 export const BALANCE = 300
 export const CARTRIDGE_SIZE = 10
 export const TOOLBAR_HEIGHT = 100
+export const CASTLE_WIDTH = 100

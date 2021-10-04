@@ -1,9 +1,13 @@
 import type {Component} from './interfaces/Component'
+import image from '../../assets/images/dragon-walk.png'
 import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
 import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {ENEMY_HEALTH, ENEMY_REWARD, ENEMY_SPEED} from '../static/enemies'
 import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
 import {createFontStyle} from '../utils/createFontStyle'
+
+const enemy1 = new Image()
+enemy1.src = image
 
 export class Enemy implements Component {
   private _context: CanvasRenderingContext2D
@@ -15,6 +19,10 @@ export class Enemy implements Component {
   private readonly _reward: number
   private readonly _speed: number
   private _movement: number
+  private _frameX: number
+  private _frameY: number
+  private _minFrame: number
+  private _maxFrame: number
 
   constructor(y: number) {
     const gameConfigurator = GameConfiguratorSingleton.getInstance()
@@ -28,20 +36,34 @@ export class Enemy implements Component {
     this._reward = ENEMY_REWARD
     this._speed = ENEMY_SPEED
     this._movement = this._speed
+    this._frameX = 0
+    this._frameY = 0
+    this._minFrame = 0
+    this._maxFrame = 9
   }
 
   move() {
     this._x -= this._movement
+    this._frameX += 0
+
+    if (this._frameX < this._maxFrame) {
+      this._frameX++
+    } else if (this._frameY < 15) {
+      this._frameX = this._minFrame
+      this._frameY++
+    } else {
+      this._frameX = 0
+      this._frameY = 0
+    }
   }
 
   draw() {
-    this._context.fillStyle = COLORS.enemyColor
-    this._context.fillRect(this._x, this._y, this._width, this._height)
     this._context.fillStyle = COLORS.textColor
     this._context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
     this._context.textAlign = 'start'
     this._context.textBaseline = 'middle'
     this._context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
+    this._context.drawImage(enemy1, this._frameX * 725, this._frameY * 445, 725, 445, this._x, this._y, this._width, this._height)
   }
 
   get width() {
