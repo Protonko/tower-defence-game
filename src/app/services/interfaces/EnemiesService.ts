@@ -1,4 +1,4 @@
-import type {Enemy} from '../../components/Enemy'
+import type {Enemy} from '../../components/interfaces/Enemy'
 
 export interface EnemiesService {
   drawEnemies: () => void,

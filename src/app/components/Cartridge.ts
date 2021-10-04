@@ -1,9 +1,9 @@
-import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
+import {ComponentWithPosition} from './abstract/ComponentWithPosition'
 import {CARTRIDGE_SIZE} from '../static/game'
 import {CARTRIDGE_POWER, CARTRIDGE_SPEED} from '../static/defenders'
 import {COLORS} from '../static/styles'
 
-export class Cartridge extends AbstractComponentWithPosition {
+export class Cartridge extends ComponentWithPosition {
   private readonly _power: number
   private readonly _speed: number
 

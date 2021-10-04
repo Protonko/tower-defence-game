@@ -1,9 +1,10 @@
+import type {Enemy} from '../components/interfaces/Enemy'
 import type {EnemiesService} from './interfaces/EnemiesService'
 import {injectable} from 'inversify'
-import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
-import {Enemy} from '../components/Enemy'
 import {CELL_SIZE} from '../static/game'
 import {ENEMY_CREATION_INTERVAL} from '../static/enemies'
+import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
+import {EnemyFactory, ENEMY_TYPE} from '../components/enemies/EnemyFactory'
 
 @injectable()
 export class EnemiesServiceImpl implements EnemiesService {
@@ -17,13 +18,15 @@ export class EnemiesServiceImpl implements EnemiesService {
     this._isEnemyGotBase = false
 
     setInterval(() => {
-      this.createEnemy()
+      this.appendEnemy()
     }, ENEMY_CREATION_INTERVAL)
   }
 
-  private createEnemy() {
+  private appendEnemy() {
+    const enemyType = Math.random() > 0.75 ? ENEMY_TYPE.DEVIL : ENEMY_TYPE.GOBLIN
     const yPosition = Math.floor(Math.random() * 5 + 1) * CELL_SIZE
-    this._enemies.push(new Enemy(yPosition))
+
+    this._enemies.push(EnemyFactory.createEnemy(enemyType, yPosition))
   }
 
   removeEnemyByIndex(index: number) {

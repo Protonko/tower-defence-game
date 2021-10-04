@@ -1,12 +1,11 @@
-import type {Component} from './interfaces/Component'
-import dragonSprite from '../../assets/images/devil-walk.png'
-import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
-import {CELL_GAP, CELL_SIZE} from '../static/game'
-import {ENEMY_HEALTH, ENEMY_REWARD, ENEMY_SPEED} from '../static/enemies'
-import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
-import {createFontStyle} from '../utils/createFontStyle'
+import type {Enemy} from '../interfaces/Enemy'
+import dragonSprite from '../../../assets/images/devil-walk.png'
+import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
+import {CELL_GAP, CELL_SIZE} from '../../static/game'
+import {COLORS, FONT_FAMILY, SIZES} from '../../static/styles'
+import {createFontStyle} from '../../utils/createFontStyle'
 
-export class Enemy implements Component {
+export class DevilEnemy implements Enemy {
   private _gameConfigurator: GameConfiguratorSingleton
   private _context: CanvasRenderingContext2D
   private _enemySprite: HTMLImageElement
@@ -14,14 +13,15 @@ export class Enemy implements Component {
   private readonly _y: number
   private readonly _width: number
   private readonly _height: number
-  private _health: number
-  private readonly _reward: number
-  private readonly _speed: number
   private _movement: number
   private _frameX: number
   private _frameY: number
   private _minFrame: number
   private _maxFrame: number
+  private _health = 150
+  private readonly _reward = 75
+  private _speed = 0.5
+  private _damage = 0.4
 
   constructor(y: number) {
     this._gameConfigurator = GameConfiguratorSingleton.getInstance()
@@ -32,9 +32,6 @@ export class Enemy implements Component {
     this._y = y
     this._width = CELL_SIZE - CELL_GAP * 2
     this._height = CELL_SIZE - CELL_GAP * 2
-    this._health = ENEMY_HEALTH
-    this._reward = ENEMY_REWARD
-    this._speed = ENEMY_SPEED
     this._movement = this._speed
     this._frameX = 0
     this._frameY = 0 // Sprite is horizontal, therefore y always is 0
@@ -74,7 +71,7 @@ export class Enemy implements Component {
       this._y,
       this._width,
       this._height,
-      )
+    )
   }
 
   get width() {
@@ -103,6 +100,10 @@ export class Enemy implements Component {
 
   get health() {
     return this._health
+  }
+
+  get damage() {
+    return this._damage
   }
 
   set health(health: number) {

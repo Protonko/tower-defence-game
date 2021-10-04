@@ -1,7 +1,7 @@
 import type {Component} from '../interfaces/Component'
 import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
 
-export abstract class AbstractComponentWithPosition implements Component {
+export abstract class ComponentWithPosition implements Component {
   protected _x: number
   protected readonly _y: number
   protected readonly _width: number

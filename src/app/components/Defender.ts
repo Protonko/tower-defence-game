@@ -1,4 +1,4 @@
-import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
+import {ComponentWithPosition} from './abstract/ComponentWithPosition'
 import {HEALTH} from '../static/defenders'
 import {CELL_GAP, CELL_SIZE} from '../static/game'
 import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
@@ -6,7 +6,7 @@ import {createFontStyle} from '../utils/createFontStyle'
 import {Cartridge} from './Cartridge'
 
 // TODO: фабричный метод для защитников
-export class Defender extends AbstractComponentWithPosition {
+export class Defender extends ComponentWithPosition {
   private _health: number
   private _timer: number
 

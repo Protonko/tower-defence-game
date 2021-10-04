@@ -1,10 +1,10 @@
 import coinSprite from '../../assets/images/coins.png'
-import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
+import {ComponentWithPosition} from './abstract/ComponentWithPosition'
 import {CELL_SIZE} from '../static/game'
 import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
 import {createFontStyle} from '../utils/createFontStyle'
 
-export class Bonus extends AbstractComponentWithPosition {
+export class Bonus extends ComponentWithPosition {
   private _amount: number
   private _coinSprite: HTMLImageElement
   private _frameX: number

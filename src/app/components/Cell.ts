@@ -1,9 +1,9 @@
 import {collision} from '../utils/collision'
-import {AbstractComponentWithPosition} from './abstract/AbstractComponentWithPosition'
+import {ComponentWithPosition} from './abstract/ComponentWithPosition'
 import {COLORS} from '../static/styles'
 import {CELL_SIZE} from '../static/game'
 
-export class Cell extends AbstractComponentWithPosition {
+export class Cell extends ComponentWithPosition {
   constructor(x: number, y: number) {
     super(x, y, CELL_SIZE)
   }
