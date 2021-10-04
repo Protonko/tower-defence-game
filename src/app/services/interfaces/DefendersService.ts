@@ -1,4 +1,4 @@
-import type {Defender} from '../../components/Defender'
+import type {Defender} from '../../components/interfaces/Defender'
 
 export interface DefendersService {
   buyDefender: () => void,

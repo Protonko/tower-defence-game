@@ -1,10 +1,11 @@
+import type {Defender} from '../components/interfaces/Defender'
 import type {CartridgesService} from './interfaces/CartridgesService'
 import type {DefendersService} from './interfaces/DefendersService'
 import {inject, injectable} from 'inversify'
 import {SERVICE_IDENTIFIER} from '../config/service-identifier'
 import {CASTLE_WIDTH, CELL_GAP, CELL_SIZE, TOOLBAR_HEIGHT} from '../static/game'
 import {DEFENDER_COST} from '../static/defenders'
-import {Defender} from '../components/Defender'
+import {DefenderFactory} from '../components/defenders/DefenderFactory'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 
 @injectable()
@@ -30,7 +31,7 @@ export class DefendersServiceImpl implements DefendersService {
 
     if (
       this._gameConfigurator.balance >= DEFENDER_COST) {
-      this._defenders.push(new Defender(gridPositionX, gridPositionY))
+      this._defenders.push(DefenderFactory.createDefender(gridPositionX, gridPositionY))
       this._gameConfigurator.balance = this._gameConfigurator.balance - DEFENDER_COST
     }
   }
