@@ -1,1 +1,0 @@
-export const ENEMY_CREATION_INTERVAL = 5000

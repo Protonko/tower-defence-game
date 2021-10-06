@@ -1,6 +1,6 @@
 import type {ControlsBar} from '../interfaces/ControlsBar'
 import type {Mouse} from '../interfaces/Mouse'
-import {AREA_HEIGHT, AREA_WIDTH, BALANCE, TOOLBAR_HEIGHT} from '../static/game'
+import {AREA_HEIGHT, AREA_WIDTH, TOOLBAR_HEIGHT} from '../static/game'
 
 export class GameConfiguratorSingleton {
   private static _instance: GameConfiguratorSingleton;
@@ -20,7 +20,7 @@ export class GameConfiguratorSingleton {
     this._context = this._canvas.getContext('2d')
     this._canvas.width = AREA_WIDTH
     this._canvas.height = AREA_HEIGHT
-    this._balance = BALANCE
+    this._balance = 300
     this._frame = 0
 
     this._canvas.addEventListener('mousemove', event => {

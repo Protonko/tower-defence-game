@@ -1,6 +1,7 @@
 // Colors
 export const COLORS = {
   toolbarColor: 'rgba(255, 255, 255, 0.25)',
+  defenderSelectorColor: 'rgba(0, 0, 0, 0.75)',
   textColor: 'gold',
   backgroundColor: 'cadetblue',
   defenderColor: 'blue',
@@ -17,6 +18,7 @@ export const SIZES = {
   gameOverFontSize: 50,
   bonusFontSize: 20,
   characterHealthSize: 15,
+  costSize: 15,
 }
 
 // Other

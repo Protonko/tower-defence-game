@@ -2,7 +2,6 @@ import type {Enemy} from '../components/interfaces/Enemy'
 import type {EnemiesService} from './interfaces/EnemiesService'
 import {injectable} from 'inversify'
 import {CELL_SIZE} from '../static/game'
-import {ENEMY_CREATION_INTERVAL} from '../static/enemies'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 import {EnemyFactory, ENEMY_TYPE} from '../components/enemies/EnemyFactory'
 
@@ -13,13 +12,15 @@ export class EnemiesServiceImpl implements EnemiesService {
   private _isEnemyGotBase: boolean
 
   constructor() {
+    const enemyCreationInterval = 5000
+
     this._gameConfigurator = GameConfiguratorSingleton.getInstance()
     this._enemies = []
     this._isEnemyGotBase = false
 
     setInterval(() => {
       this.appendEnemy()
-    }, ENEMY_CREATION_INTERVAL)
+    }, enemyCreationInterval)
   }
 
   private appendEnemy() {

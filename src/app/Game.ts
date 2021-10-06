@@ -40,14 +40,14 @@ export class Game {
     this.canvasHeight = this.gameConfigurator.canvasHeight
     this.isGameOver = false
 
-    this.grid = new Grid()
-    this.toolbar = new Toolbar()
-    this.gameOver = new GameOver()
     this.cartridgesService = container.get(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE)
     this.defendersService = container.get(SERVICE_IDENTIFIER.DEFENDERS_SERVICE)
     this.enemiesService = container.get(SERVICE_IDENTIFIER.ENEMIES_SERVICE)
     this.battleService = container.get(SERVICE_IDENTIFIER.BATTLE_SERVICE)
     this.bonusService = container.get(SERVICE_IDENTIFIER.BONUS_SERVICE)
+    this.grid = new Grid()
+    this.toolbar = new Toolbar(this.defendersService.defendersData)
+    this.gameOver = new GameOver()
 
     this.canvas.addEventListener('click', this.defendersService.buyDefender)
     this.animate()

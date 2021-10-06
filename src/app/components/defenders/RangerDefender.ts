@@ -1,12 +1,12 @@
 import type {Defender} from '../interfaces/Defender'
-import wizardSprite from '../../../assets/images/wizard-attack.png'
+import rangerSprite from '../../../assets/images/ranger-attack.png'
 import {CELL_GAP, CELL_SIZE} from '../../static/game'
 import {FONT_FAMILY, SIZES} from '../../static/styles'
 import {createFontStyle} from '../../utils/createFontStyle'
 import {Cartridge} from '../Cartridge'
 import {ComponentWithPosition} from '../abstract/ComponentWithPosition'
 
-export class WizardDefender extends ComponentWithPosition implements Defender {
+export class RangerDefender extends ComponentWithPosition implements Defender {
   private _health: number
   private _defenderSprite: HTMLImageElement
   private _timer: number
@@ -18,14 +18,14 @@ export class WizardDefender extends ComponentWithPosition implements Defender {
   constructor(x: number, y: number) {
     super(x, y, CELL_SIZE - CELL_GAP * 2)
 
-    this._health = 150
+    this._health = 100
     this._timer = 0
     this._defenderSprite = new Image()
-    this._defenderSprite.src = wizardSprite
+    this._defenderSprite.src = rangerSprite
     this._frameX = 0
     this._frameY = 0 // Sprite is horizontal, therefore y always is 0
     this._minFrame = 0
-    this._maxFrame = 3 // Sprite consists of 4 pictures
+    this._maxFrame = 9 // Sprite consists of 10 pictures
   }
 
   draw() {
@@ -58,8 +58,8 @@ export class WizardDefender extends ComponentWithPosition implements Defender {
       cartridges.push(new Cartridge(this._x + CELL_SIZE, this._y + CELL_SIZE / 2));
     }
 
-    // Slow down animation 25 times
-    if (this._gameConfigurator.frame % 25 !== 0) return
+    // Slow down animation 10 times
+    if (this._gameConfigurator.frame % 10 !== 0) return
 
     if (this._frameX < this._maxFrame) {
       this._frameX++

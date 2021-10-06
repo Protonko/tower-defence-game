@@ -1,2 +1,0 @@
-export const BONUSES_AMOUNTS = [10, 20, 30, 40]
-export const BONUS_CREATION_INTERVAL = 10000
