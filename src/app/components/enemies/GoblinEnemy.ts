@@ -1,5 +1,5 @@
 import type {Enemy} from '../interfaces/Enemy'
-import goblinSprite from '../../../assets/images/goblin-walk.png'
+import goblinSprite from '../../../assets/images/goblin-sprite.png'
 import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
 import {CELL_GAP, CELL_SIZE} from '../../static/game'
 import {COLORS, FONT_FAMILY, SIZES} from '../../static/styles'
@@ -34,7 +34,7 @@ export class GoblinEnemy implements Enemy {
     this._height = CELL_SIZE - CELL_GAP * 2
     this._movement = this._speed
     this._frameX = 0
-    this._frameY = 0 // Sprite is horizontal, therefore y always is 0
+    this._frameY = 0
     this._minFrame = 0
     this._maxFrame = 3 // Sprite consists of 4 pictures
   }
@@ -56,15 +56,13 @@ export class GoblinEnemy implements Enemy {
   draw() {
     const imageWidth = 61
     const imageHeight = 54
-    this._context.fillStyle = COLORS.textColor
-    this._context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
-    this._context.textAlign = 'start'
-    this._context.textBaseline = 'middle'
-    this._context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
+
+    this._frameY = this._movement ? 0 : 1 // first line in sprite - move, second - attack
+
     this._context.drawImage(
       this._enemySprite,
       this._frameX * imageWidth,
-      this._frameY,
+      this._frameY * imageHeight,
       imageWidth,
       imageHeight,
       this._x,
@@ -72,6 +70,11 @@ export class GoblinEnemy implements Enemy {
       this._width,
       this._height,
     )
+    this._context.fillStyle = COLORS.textColor
+    this._context.font = createFontStyle(SIZES.characterHealthSize, FONT_FAMILY)
+    this._context.textAlign = 'start'
+    this._context.textBaseline = 'middle'
+    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 2, this.y - CELL_GAP)
   }
 
   get width() {

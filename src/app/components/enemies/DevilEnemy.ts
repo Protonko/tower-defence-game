@@ -1,5 +1,5 @@
 import type {Enemy} from '../interfaces/Enemy'
-import dragonSprite from '../../../assets/images/devil-walk.png'
+import devilSprite from '../../../assets/images/devil-sprite.png'
 import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
 import {CELL_GAP, CELL_SIZE} from '../../static/game'
 import {COLORS, FONT_FAMILY, SIZES} from '../../static/styles'
@@ -27,7 +27,7 @@ export class DevilEnemy implements Enemy {
     this._gameConfigurator = GameConfiguratorSingleton.getInstance()
     this._context = this._gameConfigurator.context
     this._enemySprite = new Image()
-    this._enemySprite.src = dragonSprite
+    this._enemySprite.src = devilSprite
     this._x = this._gameConfigurator.canvasWidth
     this._y = y
     this._width = CELL_SIZE - CELL_GAP * 2
@@ -56,15 +56,13 @@ export class DevilEnemy implements Enemy {
   draw() {
     const imageWidth = 64
     const imageHeight = 40
-    this._context.fillStyle = COLORS.textColor
-    this._context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
-    this._context.textAlign = 'start'
-    this._context.textBaseline = 'middle'
-    this._context.fillText(Math.floor(this._health).toString(), this._x, this._y + CELL_SIZE / 2)
+
+    this._frameY = this._movement ? 1 : 0 // first line in sprite - attack, second - move
+
     this._context.drawImage(
       this._enemySprite,
       this._frameX * imageWidth,
-      this._frameY,
+      this._frameY * imageHeight,
       imageWidth,
       imageHeight,
       this._x,
@@ -72,6 +70,11 @@ export class DevilEnemy implements Enemy {
       this._width,
       this._height,
     )
+    this._context.fillStyle = COLORS.textColor
+    this._context.font = createFontStyle(SIZES.characterHealthSize, FONT_FAMILY)
+    this._context.textAlign = 'start'
+    this._context.textBaseline = 'middle'
+    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 2, this.y - CELL_GAP)
   }
 
   get width() {

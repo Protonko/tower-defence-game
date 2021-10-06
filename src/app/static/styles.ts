@@ -16,6 +16,7 @@ export const SIZES = {
   headerFontSize: 30,
   gameOverFontSize: 50,
   bonusFontSize: 20,
+  characterHealthSize: 15,
 }
 
 // Other

@@ -33,11 +33,6 @@ export class WizardDefender extends ComponentWithPosition implements Defender {
     const imageWidth = 32
     const imageHeight = 32
 
-    this._gameConfigurator.context.fillStyle = 'gold'
-    this._gameConfigurator.context.textAlign = 'start'
-    this._gameConfigurator.context.textBaseline = 'middle'
-    this._gameConfigurator.context.font = createFontStyle(SIZES.headerFontSize, FONT_FAMILY)
-    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 2, this._y + CELL_SIZE / 2)
     this._gameConfigurator.context.drawImage(
       this._defenderSprite,
       this._frameX * imageWidth,
@@ -49,6 +44,11 @@ export class WizardDefender extends ComponentWithPosition implements Defender {
       this._width,
       this._height,
     )
+    this._gameConfigurator.context.fillStyle = 'gold'
+    this._gameConfigurator.context.textAlign = 'start'
+    this._gameConfigurator.context.textBaseline = 'middle'
+    this._gameConfigurator.context.font = createFontStyle(SIZES.characterHealthSize, FONT_FAMILY)
+    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 3, this.y - CELL_GAP)
   }
 
   shoot(cartridges: Cartridge[]) {
