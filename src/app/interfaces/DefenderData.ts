@@ -5,6 +5,6 @@ export enum DEFENDER_TYPE {
 
 export interface DefenderData {
   type: DEFENDER_TYPE,
-  imageSource: string,
+  image: HTMLImageElement,
   cost: number,
 }

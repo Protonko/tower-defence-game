@@ -19,18 +19,7 @@ export class DefendersServiceImpl implements DefendersService {
   private _timer: number
   private _selectedDefenderType: DEFENDER_TYPE
 
-  private _defendersData: DefenderData[] = [
-    {
-      type: DEFENDER_TYPE.RANGER,
-      cost: 100,
-      imageSource: rangerSprite,
-    },
-    {
-      type: DEFENDER_TYPE.WIZARD,
-      cost: 200,
-      imageSource: wizardSprite,
-    }
-  ]
+  private _defendersData: DefenderData[]
 
   constructor(
     @inject(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE) private cartridgesService: CartridgesService
@@ -39,6 +28,25 @@ export class DefendersServiceImpl implements DefendersService {
     this._defenders = []
     this._timer = 0
     this._selectedDefenderType = DEFENDER_TYPE.RANGER
+
+    const rangerImage = new Image()
+    rangerImage.src = rangerSprite
+
+    const wizardImage = new Image()
+    wizardImage.src = wizardSprite
+
+    this._defendersData = [
+      {
+        type: DEFENDER_TYPE.RANGER,
+        cost: 100,
+        image: rangerImage,
+      },
+      {
+        type: DEFENDER_TYPE.WIZARD,
+        cost: 200,
+        image: wizardImage,
+      }
+    ]
   }
 
   buyDefender = () => {

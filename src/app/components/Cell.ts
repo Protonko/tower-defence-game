@@ -13,6 +13,7 @@ export class Cell extends ComponentWithPosition {
 
     if (gameMouse.x && gameMouse.y && collision(this, gameMouse)) {
       this._gameConfigurator.context.strokeStyle = COLORS.cellColor
+      this._gameConfigurator.context.lineWidth = 1
       this._gameConfigurator.context.strokeRect(this._x, this._y, this._width, this._height)
     }
   }

@@ -6,7 +6,7 @@ import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
 
 export class Grid implements Component {
   private _gameGrid: Cell[]
-  private _backgroundImage: HTMLImageElement
+  private readonly _backgroundImage: HTMLImageElement
 
   constructor() {
     this._gameGrid = []

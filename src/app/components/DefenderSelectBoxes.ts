@@ -7,7 +7,6 @@ import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
 
 export class DefenderSelectBoxes {
   protected readonly _gameConfigurator: GameConfiguratorSingleton
-  private _image: HTMLImageElement
   private _defendersData: DefenderData[]
   private _defendersSelectBoxMouses: Mouse[]
   private _picSize = 32 // image size in sprite is 32px
@@ -18,7 +17,6 @@ export class DefenderSelectBoxes {
 
   constructor(defendersData: DefenderData[]) {
     this._gameConfigurator = GameConfiguratorSingleton.getInstance()
-    this._image = new Image()
     this._defendersData = defendersData
     this._defendersSelectBoxMouses = []
   }
@@ -28,8 +26,6 @@ export class DefenderSelectBoxes {
   }
 
   private drawDefendersSelectBox = (defenderData: DefenderData, index: number, selectedDefenderType: DEFENDER_TYPE) => {
-    this._image.src = defenderData.imageSource
-
     const boxPosition = this._gameConfigurator.canvasWidth - (this._boxSize + this._boxMargin) * (index + 1)
 
     const mouse: Mouse = {
@@ -58,7 +54,7 @@ export class DefenderSelectBoxes {
     this._gameConfigurator.context.fillText(defenderData.cost.toString(), boxPosition + this._boxSize - this._boxPadding, this._boxPadding * 2)
 
     this._gameConfigurator.context.drawImage(
-      this._image,
+      defenderData.image,
       0,
       0,
       this._picSize,

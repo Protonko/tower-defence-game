@@ -67,7 +67,6 @@ export class Game {
     this.defendersService.drawDefenders()
     this.battleService.fight()
     this.toolbar.draw()
-    // TODO: Не отображается ranger?
     this.defenderSelectBoxes.draw(this.defendersService.selectedDefenderType)
     this.cartridgesService.drawCartridges()
     this.enemiesService.drawEnemies()
