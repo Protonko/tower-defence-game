@@ -3,8 +3,9 @@ import rangerSprite from '../../../assets/images/ranger-attack.png'
 import {CELL_GAP, CELL_SIZE} from '../../static/game'
 import {FONT_FAMILY, SIZES} from '../../static/styles'
 import {createFontStyle} from '../../utils/createFontStyle'
-import {Cartridge} from '../Cartridge'
 import {ComponentWithPosition} from '../abstract/ComponentWithPosition'
+import {Cartridge, CARTRIDGE_TYPE} from '../interfaces/Cartridge'
+import {CartridgeFactory} from '../cartridges/CartridgeFactory'
 
 export class RangerDefender extends ComponentWithPosition implements Defender {
   private _health: number
@@ -55,7 +56,7 @@ export class RangerDefender extends ComponentWithPosition implements Defender {
     this._frameX += 0
 
     if (this._timer % 100 === 0) {
-      cartridges.push(new Cartridge(this._x + CELL_SIZE, this._y + CELL_SIZE / 2));
+      cartridges.push(CartridgeFactory.createCartridge(CARTRIDGE_TYPE.ARROW, this._x + CELL_SIZE, this._y + CELL_SIZE / 2));
     }
 
     // Slow down animation 10 times

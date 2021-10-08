@@ -1,4 +1,4 @@
-import type {Cartridge} from '../../components/Cartridge'
+import type {Cartridge} from '../../components/interfaces/Cartridge'
 
 export interface CartridgesService {
   removeCartridgeByIndex: (index: number) => void

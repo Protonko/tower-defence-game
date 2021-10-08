@@ -6,7 +6,6 @@ import {injectable, inject} from 'inversify'
 import {SERVICE_IDENTIFIER} from '../config/service-identifier'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
 import {collision} from '../utils/collision'
-import {CARTRIDGE_POWER} from '../static/defenders'
 
 @injectable()
 export class BattleServiceImpl implements BattleService {
@@ -40,7 +39,7 @@ export class BattleServiceImpl implements BattleService {
     this.enemiesService.enemies.forEach((enemy, enemyIndex) => {
       this.cartridgesService.cartridges.forEach((cartridge, cartridgeIndex) => {
         if (collision(enemy, cartridge)) {
-          enemy.health = enemy.health - CARTRIDGE_POWER
+          enemy.health = enemy.health - cartridge.power
 
           this.cartridgesService.removeCartridgeByIndex(cartridgeIndex)
 

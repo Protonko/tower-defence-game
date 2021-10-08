@@ -1,4 +1,4 @@
-import type {Cartridge} from '../Cartridge'
+import type {Cartridge} from './Cartridge'
 
 export interface Defender {
   draw: () => void,
