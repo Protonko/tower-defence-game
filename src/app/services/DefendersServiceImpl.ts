@@ -20,7 +20,7 @@ export class DefendersServiceImpl implements DefendersService {
   private _timer: number
   private _selectedDefenderType: DEFENDER_TYPE
 
-  private _defendersData: DefenderData[]
+  private readonly _defendersData: DefenderData[]
 
   constructor(
     @inject(SERVICE_IDENTIFIER.CARTRIDGES_SERVICE)
