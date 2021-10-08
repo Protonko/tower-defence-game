@@ -1,9 +1,14 @@
-import {Cartridge, CARTRIDGE_TYPE} from '../interfaces/Cartridge'
+import type {Cartridge} from '@models/Cartridge'
+import {CARTRIDGE_TYPE} from '@models/CartridgeType'
 import {ArrowCartridge} from './ArrowCartridge'
 import {FireballCartridge} from './FireballCartridge'
 
 export class CartridgeFactory {
-  static createCartridge(cartridgeType: CARTRIDGE_TYPE, x: number, y: number): Cartridge {
+  static createCartridge(
+    cartridgeType: CARTRIDGE_TYPE,
+    x: number,
+    y: number,
+  ): Cartridge {
     switch (cartridgeType) {
       case CARTRIDGE_TYPE.ARROW:
         return new ArrowCartridge(x, y)

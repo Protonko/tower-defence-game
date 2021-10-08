@@ -16,13 +16,21 @@
     "isolatedModules": true,
     "noEmit": false,
     "noImplicitAny": false,
-    "typeRoots" : ["src/@types"]
+    "typeRoots": [
+      "src/@types"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["app/components/*"],
+      "@models/*": ["app/models/*"],
+      "@services/*": ["app/services/*"],
+      "@static/*": ["app/static/*"],
+      "@utils/*": ["app/utils/*"],
+      "@config/*": ["app/config/*"],
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

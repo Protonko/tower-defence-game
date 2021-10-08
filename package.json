@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Tower defence game",
   "scripts": {
-    "build": "cross-env webpack",
-    "start": "cross-env SERVE=true webpack serve --open",
-    "test": "echo 'test'"
+    "build": "cross-env webpack --mode production",
+    "start": "cross-env SERVE=true webpack serve --open"
   },
   "keywords": [
     "game",
@@ -29,6 +28,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "inversify": "^5.1.1",
+    "prettier": "^2.4.1",
     "querystring-es3": "^0.2.1",
     "reflect-metadata": "^0.1.13",
     "style-loader": "^3.3.0",

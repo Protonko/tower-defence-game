@@ -1,10 +1,14 @@
-import type {Defender} from '../interfaces/Defender'
-import {DEFENDER_TYPE} from '../../interfaces/DefenderData'
+import type {Defender} from '@models/Defender'
+import {DEFENDER_TYPE} from '@models/DefenderType'
 import {WizardDefender} from './WizardDefender'
 import {RangerDefender} from './RangerDefender'
 
 export class DefenderFactory {
-  static createDefender(defenderType: DEFENDER_TYPE, gridPositionX: number, gridPositionY: number): Defender {
+  static createDefender(
+    defenderType: DEFENDER_TYPE,
+    gridPositionX: number,
+    gridPositionY: number,
+  ): Defender {
     switch (defenderType) {
       case DEFENDER_TYPE.WIZARD:
         return new WizardDefender(gridPositionX, gridPositionY)

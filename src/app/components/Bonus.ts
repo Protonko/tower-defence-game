@@ -1,19 +1,19 @@
-import coinSprite from '../../assets/images/coins.png'
+import coinSprite from '@assets/images/coins.png'
 import {ComponentWithPosition} from './abstract/ComponentWithPosition'
-import {CELL_SIZE} from '../static/game'
-import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
-import {createFontStyle} from '../utils/createFontStyle'
+import {CELL_SIZE} from '@static/game'
+import {COLORS, FONT_FAMILY, SIZES} from '@static/styles'
+import {createFontStyle} from '@utils/createFontStyle'
 
 export class Bonus extends ComponentWithPosition {
-  private _amount: number
-  private _coinSprite: HTMLImageElement
-  private _frameX: number
+  private readonly _amount: number
+  private readonly _coinSprite: HTMLImageElement
+  private readonly _frameX: number
   private _frameY: number
-  private _minFrame: number
-  private _maxFrame: number
+  private readonly _minFrame: number
+  private readonly _maxFrame: number
 
   constructor(x: number, y: number, amount: number) {
-    super(x, y, CELL_SIZE / 2);
+    super(x, y, CELL_SIZE / 2)
 
     this._amount = amount
     this._coinSprite = new Image()
@@ -50,14 +50,21 @@ export class Bonus extends ComponentWithPosition {
       this._x,
       this._y,
       this._width,
-      this._height
+      this._height,
     )
 
     this._gameConfigurator.context.fillStyle = COLORS.bonusTextColor
-    this._gameConfigurator.context.font = createFontStyle(SIZES.bonusFontSize, FONT_FAMILY)
+    this._gameConfigurator.context.font = createFontStyle(
+      SIZES.bonusFontSize,
+      FONT_FAMILY,
+    )
     this._gameConfigurator.context.textAlign = 'center'
     this._gameConfigurator.context.textBaseline = 'middle'
-    this._gameConfigurator.context.fillText(this._amount.toString(), this._x + this._width / 2, this._y + this._height / 2)
+    this._gameConfigurator.context.fillText(
+      this._amount.toString(),
+      this._x + this._width / 2,
+      this._y + this._height / 2,
+    )
   }
 
   get amount() {

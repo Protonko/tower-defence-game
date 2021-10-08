@@ -1,20 +1,21 @@
-import type {Defender} from '../interfaces/Defender'
-import rangerSprite from '../../../assets/images/ranger-attack.png'
-import {CELL_GAP, CELL_SIZE} from '../../static/game'
-import {FONT_FAMILY, SIZES} from '../../static/styles'
-import {createFontStyle} from '../../utils/createFontStyle'
-import {ComponentWithPosition} from '../abstract/ComponentWithPosition'
-import {Cartridge, CARTRIDGE_TYPE} from '../interfaces/Cartridge'
-import {CartridgeFactory} from '../cartridges/CartridgeFactory'
+import type {Defender} from '@models/Defender'
+import type {Cartridge} from '@models/Cartridge'
+import rangerSprite from '@assets/images/ranger-attack.png'
+import {CARTRIDGE_TYPE} from '@models/CartridgeType'
+import {CELL_GAP, CELL_SIZE} from '@static/game'
+import {FONT_FAMILY, SIZES} from '@static/styles'
+import {createFontStyle} from '@utils/createFontStyle'
+import {ComponentWithPosition} from '@components/abstract/ComponentWithPosition'
+import {CartridgeFactory} from '@components/cartridges/CartridgeFactory'
 
 export class RangerDefender extends ComponentWithPosition implements Defender {
   private _health: number
-  private _defenderSprite: HTMLImageElement
+  private readonly _defenderSprite: HTMLImageElement
   private _timer: number
   private _frameX: number
-  private _frameY: number
-  private _minFrame: number
-  private _maxFrame: number
+  private readonly _frameY: number
+  private readonly _minFrame: number
+  private readonly _maxFrame: number
 
   constructor(x: number, y: number) {
     super(x, y, CELL_SIZE - CELL_GAP * 2)
@@ -47,16 +48,29 @@ export class RangerDefender extends ComponentWithPosition implements Defender {
     this._gameConfigurator.context.fillStyle = 'gold'
     this._gameConfigurator.context.textAlign = 'start'
     this._gameConfigurator.context.textBaseline = 'middle'
-    this._gameConfigurator.context.font = createFontStyle(SIZES.characterHealthSize, FONT_FAMILY)
-    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 3, this.y - CELL_GAP)
+    this._gameConfigurator.context.font = createFontStyle(
+      SIZES.characterHealthSize,
+      FONT_FAMILY,
+    )
+    this._gameConfigurator.context.fillText(
+      Math.floor(this._health).toString(),
+      this._x + CELL_SIZE / 3,
+      this.y - CELL_GAP,
+    )
   }
 
   shoot(cartridges: Cartridge[]) {
-    this._timer++;
+    this._timer++
     this._frameX += 0
 
     if (this._timer % 100 === 0) {
-      cartridges.push(CartridgeFactory.createCartridge(CARTRIDGE_TYPE.ARROW, this._x + CELL_SIZE, this._y + CELL_SIZE / 2));
+      cartridges.push(
+        CartridgeFactory.createCartridge(
+          CARTRIDGE_TYPE.ARROW,
+          this._x + CELL_SIZE,
+          this._y + CELL_SIZE / 2,
+        ),
+      )
     }
 
     // Slow down animation 10 times

@@ -1,9 +1,9 @@
-import type {ControlsBar} from '../interfaces/ControlsBar'
-import type {Mouse} from '../interfaces/Mouse'
-import {AREA_HEIGHT, AREA_WIDTH, TOOLBAR_HEIGHT} from '../static/game'
+import type {ControlsBar} from '@models/ControlsBar'
+import type {Mouse} from '@models/Mouse'
+import {AREA_HEIGHT, AREA_WIDTH, TOOLBAR_HEIGHT} from '@static/game'
 
 export class GameConfiguratorSingleton {
-  private static _instance: GameConfiguratorSingleton;
+  private static _instance: GameConfiguratorSingleton
   private readonly _canvas: HTMLCanvasElement
   private readonly _context: CanvasRenderingContext2D | null
   private _balance: number
@@ -12,7 +12,7 @@ export class GameConfiguratorSingleton {
     x: 10,
     y: 10,
     width: 0.1,
-    height: 0.1
+    height: 0.1,
   }
 
   private constructor() {
@@ -23,7 +23,7 @@ export class GameConfiguratorSingleton {
     this._balance = 300
     this._frame = 0
 
-    this._canvas.addEventListener('mousemove', event => {
+    this._canvas.addEventListener('mousemove', (event) => {
       this._mouse.x = event.x - this.canvasPosition.left
       this._mouse.y = event.y - this.canvasPosition.top
     })
@@ -36,10 +36,10 @@ export class GameConfiguratorSingleton {
 
   static getInstance(): GameConfiguratorSingleton {
     if (!GameConfiguratorSingleton._instance) {
-      GameConfiguratorSingleton._instance = new GameConfiguratorSingleton();
+      GameConfiguratorSingleton._instance = new GameConfiguratorSingleton()
     }
 
-    return GameConfiguratorSingleton._instance;
+    return GameConfiguratorSingleton._instance
   }
 
   get canvas(): HTMLCanvasElement {

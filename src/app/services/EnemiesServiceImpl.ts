@@ -1,9 +1,9 @@
-import type {Enemy} from '../components/interfaces/Enemy'
+import type {Enemy} from '@models/Enemy'
 import type {EnemiesService} from './interfaces/EnemiesService'
 import {injectable} from 'inversify'
-import {CELL_SIZE} from '../static/game'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
-import {EnemyFactory, ENEMY_TYPE} from '../components/enemies/EnemyFactory'
+import {CELL_SIZE} from '@static/game'
+import {EnemyFactory, ENEMY_TYPE} from '@components/enemies/EnemyFactory'
 
 @injectable()
 export class EnemiesServiceImpl implements EnemiesService {
@@ -24,7 +24,8 @@ export class EnemiesServiceImpl implements EnemiesService {
   }
 
   private appendEnemy() {
-    const enemyType = Math.random() > 0.75 ? ENEMY_TYPE.DEVIL : ENEMY_TYPE.GOBLIN
+    const enemyType =
+      Math.random() > 0.75 ? ENEMY_TYPE.DEVIL : ENEMY_TYPE.GOBLIN
     const yPosition = Math.floor(Math.random() * 5 + 1) * CELL_SIZE
 
     this._enemies.push(EnemyFactory.createEnemy(enemyType, yPosition))
@@ -35,7 +36,7 @@ export class EnemiesServiceImpl implements EnemiesService {
   }
 
   drawEnemies() {
-    this._enemies.forEach(enemy => {
+    this._enemies.forEach((enemy) => {
       enemy.move()
       enemy.draw()
 

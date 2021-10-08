@@ -1,14 +1,14 @@
-import type {Enemy} from '../interfaces/Enemy'
-import goblinSprite from '../../../assets/images/goblin-sprite.png'
-import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
-import {CELL_GAP, CELL_SIZE} from '../../static/game'
-import {COLORS, FONT_FAMILY, SIZES} from '../../static/styles'
-import {createFontStyle} from '../../utils/createFontStyle'
+import type {Enemy} from '@models/Enemy'
+import goblinSprite from '@assets/images/goblin-sprite.png'
+import {GameConfiguratorSingleton} from '@services/GameConfiguratorSingleton'
+import {CELL_GAP, CELL_SIZE} from '@static/game'
+import {COLORS, FONT_FAMILY, SIZES} from '@static/styles'
+import {createFontStyle} from '@utils/createFontStyle'
 
 export class GoblinEnemy implements Enemy {
   private _gameConfigurator: GameConfiguratorSingleton
   private _context: CanvasRenderingContext2D
-  private _enemySprite: HTMLImageElement
+  private readonly _enemySprite: HTMLImageElement
   private _x: number
   private readonly _y: number
   private readonly _width: number
@@ -16,8 +16,8 @@ export class GoblinEnemy implements Enemy {
   private _movement: number
   private _frameX: number
   private _frameY: number
-  private _minFrame: number
-  private _maxFrame: number
+  private readonly _minFrame: number
+  private readonly _maxFrame: number
   private _health = 100
   private readonly _reward = 50
   private _speed = 0.4
@@ -74,7 +74,11 @@ export class GoblinEnemy implements Enemy {
     this._context.font = createFontStyle(SIZES.characterHealthSize, FONT_FAMILY)
     this._context.textAlign = 'start'
     this._context.textBaseline = 'middle'
-    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 2, this.y - CELL_GAP)
+    this._gameConfigurator.context.fillText(
+      Math.floor(this._health).toString(),
+      this._x + CELL_SIZE / 2,
+      this.y - CELL_GAP,
+    )
   }
 
   get width() {

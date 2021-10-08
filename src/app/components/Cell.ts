@@ -1,7 +1,7 @@
-import {collision} from '../utils/collision'
+import {collision} from '@utils/collision'
 import {ComponentWithPosition} from './abstract/ComponentWithPosition'
-import {COLORS} from '../static/styles'
-import {CELL_SIZE} from '../static/game'
+import {COLORS} from '@static/styles'
+import {CELL_SIZE} from '@static/game'
 
 export class Cell extends ComponentWithPosition {
   constructor(x: number, y: number) {
@@ -14,7 +14,12 @@ export class Cell extends ComponentWithPosition {
     if (gameMouse.x && gameMouse.y && collision(this, gameMouse)) {
       this._gameConfigurator.context.strokeStyle = COLORS.cellColor
       this._gameConfigurator.context.lineWidth = 1
-      this._gameConfigurator.context.strokeRect(this._x, this._y, this._width, this._height)
+      this._gameConfigurator.context.strokeRect(
+        this._x,
+        this._y,
+        this._width,
+        this._height,
+      )
     }
   }
 }

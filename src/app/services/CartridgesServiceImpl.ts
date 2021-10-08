@@ -1,13 +1,13 @@
-import type {Cartridge} from '../components/interfaces/Cartridge'
+import type {Cartridge} from '@models/Cartridge'
 import type {CartridgesService} from './interfaces/CartridgesService'
 import {injectable} from 'inversify'
-import {CELL_SIZE} from '../static/game'
 import {GameConfiguratorSingleton} from './GameConfiguratorSingleton'
+import {CELL_SIZE} from '@static/game'
 
 @injectable()
 export class CartridgesServiceImpl implements CartridgesService {
   private _cartridges: Cartridge[]
-  private _canvasWidth: number
+  private readonly _canvasWidth: number
 
   constructor() {
     const gameConfigurator = GameConfiguratorSingleton.getInstance()

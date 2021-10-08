@@ -1,14 +1,14 @@
-import type {Enemy} from '../interfaces/Enemy'
-import devilSprite from '../../../assets/images/devil-sprite.png'
-import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
-import {CELL_GAP, CELL_SIZE} from '../../static/game'
-import {COLORS, FONT_FAMILY, SIZES} from '../../static/styles'
-import {createFontStyle} from '../../utils/createFontStyle'
+import type {Enemy} from '@models/Enemy'
+import devilSprite from '@assets/images/devil-sprite.png'
+import {GameConfiguratorSingleton} from '@services/GameConfiguratorSingleton'
+import {CELL_GAP, CELL_SIZE} from '@static/game'
+import {COLORS, FONT_FAMILY, SIZES} from '@static/styles'
+import {createFontStyle} from '@utils/createFontStyle'
 
 export class DevilEnemy implements Enemy {
   private _gameConfigurator: GameConfiguratorSingleton
   private _context: CanvasRenderingContext2D
-  private _enemySprite: HTMLImageElement
+  private readonly _enemySprite: HTMLImageElement
   private _x: number
   private readonly _y: number
   private readonly _width: number
@@ -16,12 +16,12 @@ export class DevilEnemy implements Enemy {
   private _movement: number
   private _frameX: number
   private _frameY: number
-  private _minFrame: number
-  private _maxFrame: number
+  private readonly _minFrame: number
+  private readonly _maxFrame: number
   private _health = 150
   private readonly _reward = 75
   private _speed = 0.5
-  private _damage = 0.4
+  private readonly _damage = 0.4
 
   constructor(y: number) {
     this._gameConfigurator = GameConfiguratorSingleton.getInstance()
@@ -74,7 +74,11 @@ export class DevilEnemy implements Enemy {
     this._context.font = createFontStyle(SIZES.characterHealthSize, FONT_FAMILY)
     this._context.textAlign = 'start'
     this._context.textBaseline = 'middle'
-    this._gameConfigurator.context.fillText(Math.floor(this._health).toString(), this._x + CELL_SIZE / 2, this.y - CELL_GAP)
+    this._gameConfigurator.context.fillText(
+      Math.floor(this._health).toString(),
+      this._x + CELL_SIZE / 2,
+      this.y - CELL_GAP,
+    )
   }
 
   get width() {

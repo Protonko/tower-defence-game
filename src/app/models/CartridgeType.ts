@@ -1,0 +1,4 @@
+export enum CARTRIDGE_TYPE {
+  ARROW = 'ARROW',
+  FIREBALL = 'FIREBALL',
+}

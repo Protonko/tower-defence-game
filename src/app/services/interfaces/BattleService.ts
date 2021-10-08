@@ -1,3 +1,3 @@
 export interface BattleService {
-  fight: () => void,
+  fight: () => void
 }

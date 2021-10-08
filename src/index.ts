@@ -1,5 +1,5 @@
-import './assets/style/style.css'
-import {Game} from './app/Game'
+import '@assets/style/style.css'
+import {Game} from '@app/Game'
 
 try {
   new Game()

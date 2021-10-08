@@ -1,8 +1,8 @@
-import type {Component} from './interfaces/Component'
-import backgroundImage from '../../assets/images/tower-background.png'
-import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
-import {COLORS, FONT_FAMILY, SIZES} from '../static/styles'
-import {createFontStyle} from '../utils/createFontStyle'
+import type {Component} from '@models/Component'
+import backgroundImage from '@assets/images/tower-background.png'
+import {GameConfiguratorSingleton} from '@services/GameConfiguratorSingleton'
+import {COLORS, FONT_FAMILY, SIZES} from '@static/styles'
+import {createFontStyle} from '@utils/createFontStyle'
 
 export class GameOver implements Component {
   private _canvas: HTMLCanvasElement
@@ -23,7 +23,15 @@ export class GameOver implements Component {
     this._context.fillStyle = COLORS.textColor
     this._context.font = createFontStyle(SIZES.gameOverFontSize, FONT_FAMILY)
     this._context.textAlign = 'center'
-    this._context.fillText('GAME OVER', this._canvas.width / 2, this._canvas.height / 2)
-    this._context.fillText('Refresh page to try again', this._canvas.width / 2, this._canvas.height / 2 + 100)
+    this._context.fillText(
+      'GAME OVER',
+      this._canvas.width / 2,
+      this._canvas.height / 2,
+    )
+    this._context.fillText(
+      'Refresh page to try again',
+      this._canvas.width / 2,
+      this._canvas.height / 2 + 100,
+    )
   }
 }

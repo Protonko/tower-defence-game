@@ -1,8 +1,14 @@
-import type {Component} from './interfaces/Component'
-import backgroundImage from '../../assets/images/bg.png'
-import {AREA_HEIGHT, AREA_WIDTH, CASTLE_WIDTH, CELL_SIZE, TOOLBAR_HEIGHT} from '../static/game'
+import type {Component} from '@models/Component'
+import backgroundImage from '@assets/images/bg.png'
+import {
+  AREA_HEIGHT,
+  AREA_WIDTH,
+  CASTLE_WIDTH,
+  CELL_SIZE,
+  TOOLBAR_HEIGHT,
+} from '@static/game'
 import {Cell} from './Cell'
-import {GameConfiguratorSingleton} from '../services/GameConfiguratorSingleton'
+import {GameConfiguratorSingleton} from '@services/GameConfiguratorSingleton'
 
 export class Grid implements Component {
   private _gameGrid: Cell[]
@@ -26,7 +32,7 @@ export class Grid implements Component {
   draw = () => {
     const context = GameConfiguratorSingleton.getInstance().context
     context.drawImage(this._backgroundImage, 0, 0, 900, 600)
-    this._gameGrid.forEach(cell => {
+    this._gameGrid.forEach((cell) => {
       cell.draw()
     })
   }

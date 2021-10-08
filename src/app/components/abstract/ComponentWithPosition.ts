@@ -1,5 +1,5 @@
-import type {Component} from '../interfaces/Component'
-import {GameConfiguratorSingleton} from '../../services/GameConfiguratorSingleton'
+import type {Component} from '@models/Component'
+import {GameConfiguratorSingleton} from '@services/GameConfiguratorSingleton'
 
 export abstract class ComponentWithPosition implements Component {
   protected _x: number
