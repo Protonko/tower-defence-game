@@ -9,6 +9,7 @@ import {SERVICE_IDENTIFIER} from './config/service-identifier'
 import {Grid} from './components/Grid'
 import {Toolbar} from './components/Toolbar'
 import {GameOver} from './components/GameOver'
+import {DefenderSelectBoxes} from './components/DefenderSelectBoxes'
 
 export class Game {
   private gameConfigurator: GameConfiguratorSingleton
@@ -20,6 +21,7 @@ export class Game {
   private grid: Grid
   private toolbar: Toolbar
   private gameOver: GameOver
+  private defenderSelectBoxes: DefenderSelectBoxes
   private cartridgesService: CartridgesService
   private defendersService: DefendersService
   private enemiesService: EnemiesService
@@ -46,10 +48,12 @@ export class Game {
     this.battleService = container.get(SERVICE_IDENTIFIER.BATTLE_SERVICE)
     this.bonusService = container.get(SERVICE_IDENTIFIER.BONUS_SERVICE)
     this.grid = new Grid()
-    this.toolbar = new Toolbar(this.defendersService.defendersData)
+    this.toolbar = new Toolbar()
     this.gameOver = new GameOver()
+    this.defenderSelectBoxes = new DefenderSelectBoxes(this.defendersService.defendersData)
 
     this.canvas.addEventListener('click', this.defendersService.buyDefender)
+    this.canvas.addEventListener('click', () => this.defendersService.selectDefender(this.defenderSelectBoxes.defendersSelectBoxMouses))
     this.animate()
   }
 
@@ -63,6 +67,8 @@ export class Game {
     this.defendersService.drawDefenders()
     this.battleService.fight()
     this.toolbar.draw()
+    // TODO: Не отображается ranger?
+    this.defenderSelectBoxes.draw(this.defendersService.selectedDefenderType)
     this.cartridgesService.drawCartridges()
     this.enemiesService.drawEnemies()
     this.bonusService.drawBonuses()
