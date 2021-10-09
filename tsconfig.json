@@ -16,9 +16,7 @@
     "isolatedModules": true,
     "noEmit": false,
     "noImplicitAny": false,
-    "typeRoots": [
-      "src/@types"
-    ],
+    "typeRoots": ["src/@types"],
     "baseUrl": "./src",
     "paths": {
       "@app/*": ["app/*"],
@@ -28,7 +26,7 @@
       "@services/*": ["app/services/*"],
       "@static/*": ["app/static/*"],
       "@utils/*": ["app/utils/*"],
-      "@config/*": ["app/config/*"],
+      "@config/*": ["app/config/*"]
     }
   },
   "include": ["src/**/*"],

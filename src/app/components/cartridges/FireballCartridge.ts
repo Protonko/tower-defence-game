@@ -3,7 +3,10 @@ import fireballImage from '@assets/images/fireball.png'
 import {ComponentWithPosition} from '@components/abstract/ComponentWithPosition'
 import {CARTRIDGE_SIZE} from '@static/game'
 
-export class FireballCartridge extends ComponentWithPosition implements Cartridge {
+export class FireballCartridge
+  extends ComponentWithPosition
+  implements Cartridge
+{
   private readonly _cartridgeImage: HTMLImageElement
 
   private readonly _power = 20
